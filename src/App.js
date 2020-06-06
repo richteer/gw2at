@@ -1,23 +1,17 @@
 import React from 'react';
 import './App.css';
 
-import AchievementView from './AchievementView'
+import AchievementViewTabs from './AchievementViewTabs'
 import AchievementSelector from './AchievementSelector'
 
 import Alert from 'react-bootstrap/Alert'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Tabs from 'react-bootstrap/Tabs'
-import Tab from 'react-bootstrap/Tab'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
-import Dropdown from 'react-bootstrap/Dropdown'
-import Form from 'react-bootstrap/Form'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-import achievement_data from './achievement_data.json'
 
 const api_root = "https://api.guildwars2.com"
 /*
@@ -52,30 +46,12 @@ class App extends React.Component {
       this.state = {
         error: "Hi! Set an API key above, and complain to me later when it's not there after a page refresh",
         achieves: {},
-        activeTab: "Main",
-        tabs: {
-          Main: [
-              5327,
-              5312,
-              5319,
-              5298
-          ],
-          Repeatables: [
-              5338,
-              5278,
-              5334,
-              5286
-            ]
-        },
-        newTab: ""
+        achieveViewRef: React.createRef() // TODO: Does this really need to be in state?
       }
 
       //this.state.achieves = this.state.tracked.map(e => ({"id":e, "current": 0}))
 
       this.apiKeyRef = React.createRef()
-      this.addTab = this.addTab.bind(this);
-      this.onTabNameChange = this.onTabNameChange.bind(this);
-
   }
 
   componentDidMount() {
@@ -85,8 +61,6 @@ class App extends React.Component {
       this.apiKeyRef.current.value = apikey
       this.updateApiKey(apikey)
     }
-
-    this.loadStateFromStorage()
   }
 
   updateAchievementData(data) {
@@ -148,89 +122,6 @@ class App extends React.Component {
     this.setState({"error" : ""})
   }
 
-  selectAchievement(ach_id) {
-    this.setState(state => {
-        const tmp = state.tabs[state.activeTab]
-        // Don't add if already tracked in this tab
-        if (tmp.indexOf(ach_id) >= 0) {
-          return {}
-        }
-        var tracked = [...tmp, ach_id]
-        var newtabs = {
-          ...state.tabs,
-        }
-        newtabs[state.activeTab] = tracked
-        return {tabs: newtabs}
-    }, () => (this.saveStateToStorage())
-    )
-  }
-
-  deselectAchievement(ach_id) {
-    this.setState(state => {
-      
-      var remove = state.tabs[state.activeTab].indexOf(ach_id)
-
-      if (remove < 0) {
-        return {}
-      }
-
-      var tracked = [...state.tabs[state.activeTab]]
-      tracked.splice(remove, 1)
-
-      var newtabs = {
-        ...state.tabs
-      }
-      newtabs[state.activeTab] = tracked
-      return {tabs: newtabs}
-    }, () => (this.saveStateToStorage())
-    )
-  }
-
-  // Call this whenever updating something the user might want to keep
-  saveStateToStorage() {
-    localStorage.setItem("tabs", JSON.stringify(this.state.tabs))
-  }
-
-  // Call this on page load, and that's probably it
-  loadStateFromStorage() {
-    const newtabs = localStorage.getItem("tabs")
-
-    if (!newtabs)
-      return
-
-    console.log("reloading tabs from localstorage:")
-    console.log(JSON.parse(newtabs))
-    this.setState({tabs: JSON.parse(newtabs)})
-  }
-
-  onTabNameChange(e){
-    this.setState({newTab: e.target.value});
-  }
-
-  addTab(e){
-    this.setState(state => {
-      var newtabs = {
-        ...state.tabs
-      }
-      newtabs[state.newTab] = []
-
-      return {tabs:newtabs, newTab:""}
-    }, () => (this.saveStateToStorage()))
-    e.preventDefault()
-  }
-
-  renameTab(e){
-  }
-
-  removeTab(e){
-    this.setState(state => {
-      var newtabs = {}
-      Object.entries(this.state.tabs).filter(tab => tab[0] !== e).forEach(tab => {newtabs[tab[0]] = tab[1]})
-
-      return {tabs:newtabs}
-    }, () => (this.saveStateToStorage()))
-  }
-
   render() {
     return (
       <div className="App">
@@ -259,56 +150,14 @@ class App extends React.Component {
         <Row>
           <Col sm="auto" style={{width: "400px"}}>
             <AchievementSelector
-              selectAchievement={this.selectAchievement.bind(this)}
+              selectAchievement={this.state.achieveViewRef}
               playerAchieves={this.state.achieves}
               />
           </Col>
           <Col>
-            <Tabs onSelect={(e) => this.setState({activeTab: e.replace("key-", "")})}>
-            {
-              Object.entries(this.state.tabs).map(tab => (
-              <Tab eventKey={`key-${tab[0]}`} title={tab[0]}>
-                <Dropdown>
-                  <Dropdown.Toggle size="sm" block variant="outline-light">
-                    <img src="https://wiki.guildwars2.com/images/2/25/Game_menu_options_icon.png"
-                        alt="Achivement Options"
-                        width={24} height={24}/>
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item onSelect={() => this.renameTab(tab[0])}>
-                      <img src="https://wiki.guildwars2.com/images/c/c9/Closed.png"
-                        width={24} height={24}
-                        alt="Rename Tab"/>
-                        Rename
-                    </Dropdown.Item>
-                    <Dropdown.Item onSelect={() => this.removeTab(tab[0])}>
-                      <img src="https://wiki.guildwars2.com/images/c/c9/Closed.png"
-                        width={24} height={24}
-                        alt="Remove Tab"/>
-                        Remove
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-                <AchievementView
-                  achievements={tab[1].map(a => achievement_data[a]).filter(a => a)}
-                  current={this.state.achieves}
-                  deselectAchievement={this.deselectAchievement.bind(this)}
-                  />
-              </Tab>
-            ))}
-            <Tab eventKey="new_tab" title="+">
-              <Form onSubmit={this.addTab}>
-                <Form.Row>
-                  <Col>
-                      <Form.Control type="text" placeholder="New Tab" value={this.state.newTab} onChange={this.onTabNameChange}/>
-                  </Col>
-                  <Col sm="auto" style={{display: "flex", alignItems:"left", justifyContent:"center"}}>
-                    <Button variant="primary" type="submit">Add</Button>
-                  </Col>
-                </Form.Row>
-              </Form>
-            </Tab>
-            </Tabs>
+            <AchievementViewTabs
+              ref={this.state.achieveViewRef}
+              achieves={this.state.achieves}/>
           </Col>
         </Row>
 
