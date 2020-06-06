@@ -73,7 +73,7 @@ class App extends React.Component {
       //this.state.achieves = this.state.tracked.map(e => ({"id":e, "current": 0}))
 
       this.apiKeyRef = React.createRef()
-      this.addTab = this.addTab.bind(this);
+      this.onAddTabSubmit = this.onAddTabSubmit.bind(this);
       this.onTabNameChange = this.onTabNameChange.bind(this);
 
   }
@@ -149,20 +149,22 @@ class App extends React.Component {
   }
 
   selectAchievement(ach_id) {
-    this.setState(state => {
-        const tmp = state.tabs[state.activeTab]
-        // Don't add if already tracked in this tab
-        if (tmp.indexOf(ach_id) >= 0) {
-          return {}
-        }
-        var tracked = [...tmp, ach_id]
-        var newtabs = {
-          ...state.tabs,
-        }
-        newtabs[state.activeTab] = tracked
-        return {tabs: newtabs}
-    }, () => (this.saveStateToStorage())
-    )
+    if(this.state.activeTab !== "new_tab"){
+      this.setState(state => {
+          const tmp = state.tabs[state.activeTab]
+          // Don't add if already tracked in this tab
+          if (tmp.indexOf(ach_id) >= 0) {
+            return {}
+          }
+          var tracked = [...tmp, ach_id]
+          var newtabs = {
+            ...state.tabs,
+          }
+          newtabs[state.activeTab] = tracked
+          return {tabs: newtabs}
+      }, () => (this.saveStateToStorage())
+      )
+    }
   }
 
   deselectAchievement(ach_id) {
@@ -207,7 +209,7 @@ class App extends React.Component {
     this.setState({newTab: e.target.value});
   }
 
-  addTab(e){
+  onAddTabSubmit(e){
     this.setState(state => {
       var newtabs = {
         ...state.tabs
@@ -297,7 +299,7 @@ class App extends React.Component {
               </Tab>
             ))}
             <Tab eventKey="new_tab" title="+">
-              <Form onSubmit={this.addTab}>
+              <Form onSubmit={this.onAddTabSubmit}>
                 <Form.Row>
                   <Col>
                       <Form.Control type="text" placeholder="New Tab" value={this.state.newTab} onChange={this.onTabNameChange}/>
