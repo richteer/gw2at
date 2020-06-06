@@ -1,0 +1,956 @@
+{
+  "93371": {
+    "name": "Special Mission Document",
+    "description": "Unlocks a new achievement for Charr Commendations in Icebrood Saga Episode 3, \"No Quarter.\"",
+    "type": "Consumable",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 500,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [],
+    "restrictions": [],
+    "id": 93371,
+    "chat_link": "[&AgG7bAEA]",
+    "icon": "https://render.guildwars2.com/file/027D1D382447933D074BE45F405EA1F379471DEB/63127.png",
+    "details": {
+      "type": "Generic"
+    }
+  },
+  "93515": {
+    "name": "Ash Legion Leather Box",
+    "description": "Double-click to open.\nContains 100 assorted sections of leather.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93515,
+    "chat_link": "[&AgFLbQEA]",
+    "icon": "https://render.guildwars2.com/file/BC3BA4D997A9ADCC0B0A266E043D176846760D69/2292711.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93378": {
+    "name": "Ash Legion Crafting Box",
+    "description": "Double-click to open.\nContains a choice of Stormcaller weapon recipes (dagger, pistol, short bow, or sword), crafting material coffers, mission documents, or charr salvage.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93378,
+    "chat_link": "[&AgHCbAEA]",
+    "icon": "https://render.guildwars2.com/file/65AEE33144CC0E692494800D38E1D79A036CCB02/2292729.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93455": {
+    "name": "Charr Salvage",
+    "description": "Use to create War Supplies that can be used or traded in the Drizzlewood Coast.",
+    "type": "Consumable",
+    "level": 0,
+    "rarity": "Rare",
+    "vendor_value": 96,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "BulkConsume",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93455,
+    "chat_link": "[&AgEPbQEA]",
+    "icon": "https://render.guildwars2.com/file/F8F26CAF5354703FE420FDAA03F90F3E781998A9/2293281.png",
+    "details": {
+      "type": "Generic"
+    }
+  },
+  "93588": {
+    "name": "Ash Legion Venom Box",
+    "description": "Double-click to open.\nContains 100 assorted venom sacs.\n<c=@flavor>For medicinal purposes, obviously. Nobody could possibly need to make this much poison.</c>",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93588,
+    "chat_link": "[&AgGUbQEA]",
+    "icon": "https://render.guildwars2.com/file/5AC603DAA66AECC8C842A443EB2D610ADA08DCF8/2292712.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "65448": {
+    "name": "Champion Jotun Loot Box",
+    "description": "This champion container has champion bags, dragonite ore, and empyreal fragments.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "Pvp",
+      "PvpLobby",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 65448,
+    "chat_link": "[&AgGo/wAA]",
+    "icon": "https://render.guildwars2.com/file/290A0776736F9DD308D3CA1A1140EF7DC713B30B/780324.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93369": {
+    "name": "Ash Legion Glacial Materials Box",
+    "description": "Double-click to open.\nContains 25 assorted glacial materials.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93369,
+    "chat_link": "[&AgG5bAEA]",
+    "icon": "https://render.guildwars2.com/file/E8EA980CC3E04EA7CCBA4E649A3AEB6637901E41/2292713.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93516": {
+    "name": "Ash Legion Special Mission Document",
+    "description": "Unlocks a new achievement for Ash Legion Commendations in Icebrood Saga Episode 3, \"No Quarter.\"",
+    "type": "Consumable",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 500,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [],
+    "restrictions": [],
+    "id": 93516,
+    "chat_link": "[&AgFMbQEA]",
+    "icon": "https://render.guildwars2.com/file/027D1D382447933D074BE45F405EA1F379471DEB/63127.png",
+    "details": {
+      "type": "Generic"
+    }
+  },
+  "65394": {
+    "name": "Champion Wurm Loot Box",
+    "description": "This champion container has champion bags.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "Pvp",
+      "PvpLobby",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 65394,
+    "chat_link": "[&AgFy/wAA]",
+    "icon": "https://render.guildwars2.com/file/5EA9E8CFE5113717DCA7F0797B50B2CE03DC9072/780309.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93574": {
+    "name": "Ash Legion Reward Box",
+    "description": "Double-click to open.\nContains 50 Dragonite Ore, 50 Empyreal Fragments, 2 Mystic Clovers, 8 Obsidian Shards, and a choice of valuable items from the Ash Legion.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93574,
+    "chat_link": "[&AgGGbQEA]",
+    "icon": "https://render.guildwars2.com/file/5876F65ED2984937CE4CF70406F5E3C780221A64/2292709.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93357": {
+    "name": "Blood Legion Wood Box",
+    "description": "Double-click to open.\nContains 100 assorted wooden logs.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93357,
+    "chat_link": "[&AgGtbAEA]",
+    "icon": "https://render.guildwars2.com/file/BC3BA4D997A9ADCC0B0A266E043D176846760D69/2292711.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93547": {
+    "name": "Blood Legion Crafting Box",
+    "description": "Double-click to open.\nContains a choice of Stormcaller weapon recipes (axe, greatsword, longbow, or warhorn), crafting material coffers, mission documents, or charr salvage.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93547,
+    "chat_link": "[&AgFrbQEA]",
+    "icon": "https://render.guildwars2.com/file/65AEE33144CC0E692494800D38E1D79A036CCB02/2292729.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93478": {
+    "name": "Blood Legion Blood Box",
+    "description": "Double-click to open.\nContains 100 assorted vials of blood.\n<c=@flavor>\"I suppose it makes sense. They are the Blood Legion.\"</c>",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93478,
+    "chat_link": "[&AgEmbQEA]",
+    "icon": "https://render.guildwars2.com/file/5AC603DAA66AECC8C842A443EB2D610ADA08DCF8/2292712.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "65398": {
+    "name": "Champion Branded Minion Loot Box",
+    "description": "This champion container has champion bags, dragonite ore, and empyreal fragments.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "Pvp",
+      "PvpLobby",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 65398,
+    "chat_link": "[&AgF2/wAA]",
+    "icon": "https://render.guildwars2.com/file/D4389602BA11EA461C9D6745B8AAA30DF7E0CA67/780312.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93658": {
+    "name": "Blood Legion Charged Materials Box",
+    "description": "Double-click to open.\nContains 25 assorted charged materials.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93658,
+    "chat_link": "[&AgHabQEA]",
+    "icon": "https://render.guildwars2.com/file/E8EA980CC3E04EA7CCBA4E649A3AEB6637901E41/2292713.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93499": {
+    "name": "Blood Legion Special Mission Document",
+    "description": "Unlocks a new achievement for Blood Legion Commendations in Icebrood Saga Episode 3, \"No Quarter.\"",
+    "type": "Consumable",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 500,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [],
+    "restrictions": [],
+    "id": 93499,
+    "chat_link": "[&AgE7bQEA]",
+    "icon": "https://render.guildwars2.com/file/027D1D382447933D074BE45F405EA1F379471DEB/63127.png",
+    "details": {
+      "type": "Generic"
+    }
+  },
+  "65449": {
+    "name": "Champion Grawl Loot Box",
+    "description": "This champion container has champion bags, dragonite ore, and empyreal fragments.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "Pvp",
+      "PvpLobby",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 65449,
+    "chat_link": "[&AgGp/wAA]",
+    "icon": "https://render.guildwars2.com/file/B70C7DF554E8E7465BA106CFAE1CF47FD139F8C8/780325.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93485": {
+    "name": "Blood Legion Reward Box",
+    "description": "Double-click to open.\nContains 50 Dragonite Ore, 50 Empyreal Fragments, 2 Mystic Clovers, 8 Obsidian Shards, and a choice of valuable items from the Blood Legion.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93485,
+    "chat_link": "[&AgEtbQEA]",
+    "icon": "https://render.guildwars2.com/file/3172EBBB98687244F06F0BF85DA4D10790E5EC74/2292710.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93648": {
+    "name": "Flame Legion Cloth Box",
+    "description": "Double-click to open.\nContains 100 assorted scraps of cloth.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93648,
+    "chat_link": "[&AgHQbQEA]",
+    "icon": "https://render.guildwars2.com/file/BC3BA4D997A9ADCC0B0A266E043D176846760D69/2292711.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93465": {
+    "name": "Flame Legion Crafting Box",
+    "description": "Double-click to open.\nContains a choice of Stormcaller weapon recipes (focus, scepter, staff, or torch), crafting material coffers, mission documents, or charr salvage.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93465,
+    "chat_link": "[&AgEZbQEA]",
+    "icon": "https://render.guildwars2.com/file/65AEE33144CC0E692494800D38E1D79A036CCB02/2292729.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93636": {
+    "name": "Flame Legion Dust Box",
+    "description": "Double-click to open.\nContains 100 assorted piles of dust.\n<c=@flavor>When you think about it, shouldn't it just be one pile in there?</c>",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93636,
+    "chat_link": "[&AgHEbQEA]",
+    "icon": "https://render.guildwars2.com/file/5AC603DAA66AECC8C842A443EB2D610ADA08DCF8/2292712.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "65399": {
+    "name": "Champion Ogre Loot Box",
+    "description": "This champion container has champion bags, dragonite ore, and empyreal fragments.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "Pvp",
+      "PvpLobby",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 65399,
+    "chat_link": "[&AgF3/wAA]",
+    "icon": "https://render.guildwars2.com/file/6EC75210B1296392A990683621F5F4710139EF0A/780313.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93492": {
+    "name": "Flame Legion Molten Materials Box",
+    "description": "Double-click to open.\nContains 25 assorted molten materials.\n<c=@flavor>Fire. It's a box of fire. Because the Flame Legion loves fire.</c>",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93492,
+    "chat_link": "[&AgE0bQEA]",
+    "icon": "https://render.guildwars2.com/file/E8EA980CC3E04EA7CCBA4E649A3AEB6637901E41/2292713.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93522": {
+    "name": "Flame Legion Special Mission Document",
+    "description": "Unlocks a new achievement for Flame Legion Commendations in Icebrood Saga Episode 3, \"No Quarter.\"",
+    "type": "Consumable",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 500,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [],
+    "restrictions": [],
+    "id": 93522,
+    "chat_link": "[&AgFSbQEA]",
+    "icon": "https://render.guildwars2.com/file/027D1D382447933D074BE45F405EA1F379471DEB/63127.png",
+    "details": {
+      "type": "Generic"
+    }
+  },
+  "65450": {
+    "name": "Champion Sons of Svanir Loot Box",
+    "description": "This champion container has champion bags.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "Pvp",
+      "PvpLobby",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 65450,
+    "chat_link": "[&AgGq/wAA]",
+    "icon": "https://render.guildwars2.com/file/D5A50B3D749B4DAB18AE0EEBC2E7C052593C2EFD/780326.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93543": {
+    "name": "Flame Legion Reward Box",
+    "description": "Double-click to open.\nContains 50 Dragonite Ore, 50 Empyreal Fragments, 2 Mystic Clovers, 8 Obsidian Shards, and a choice of valuable items from the Flame legion.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93543,
+    "chat_link": "[&AgFnbQEA]",
+    "icon": "https://render.guildwars2.com/file/2CC2F0530E1EF7C61C412556DE2925B509C8C39C/2292714.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93576": {
+    "name": "Iron Legion Ore Box",
+    "description": "Double-click to open.\nContains 100 assorted pieces of ore.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93576,
+    "chat_link": "[&AgGIbQEA]",
+    "icon": "https://render.guildwars2.com/file/BC3BA4D997A9ADCC0B0A266E043D176846760D69/2292711.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93430": {
+    "name": "Iron Legion Crafting Box",
+    "description": "Double-click to open.\nContains a choice of Stormcaller weapon recipes (hammer, mace, rifle, or shield), crafting material coffers, mission documents, or charr salvage.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93430,
+    "chat_link": "[&AgH2bAEA]",
+    "icon": "https://render.guildwars2.com/file/65AEE33144CC0E692494800D38E1D79A036CCB02/2292729.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93364": {
+    "name": "Iron Legion Claw Box",
+    "description": "Double-click to open.\nContains 100 assorted claws.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93364,
+    "chat_link": "[&AgG0bAEA]",
+    "icon": "https://render.guildwars2.com/file/5AC603DAA66AECC8C842A443EB2D610ADA08DCF8/2292712.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "65400": {
+    "name": "Champion Warg Loot Box",
+    "description": "This champion container has champion bags, dragonite ore, and empyreal fragments.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "Pvp",
+      "PvpLobby",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 65400,
+    "chat_link": "[&AgF4/wAA]",
+    "icon": "https://render.guildwars2.com/file/10B1055F549A77D64BE2AF4C083F46366868FFE4/780314.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93432": {
+    "name": "Iron Legion Onyx Materials Box",
+    "description": "Double-click to open.\nContains 25 assorted onyx materials.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93432,
+    "chat_link": "[&AgH4bAEA]",
+    "icon": "https://render.guildwars2.com/file/E8EA980CC3E04EA7CCBA4E649A3AEB6637901E41/2292713.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93619": {
+    "name": "Iron Legion Special Mission Document",
+    "description": "Unlocks a new achievement for Iron Legion Commendations in Icebrood Saga Episode 3, \"No Quarter.\"",
+    "type": "Consumable",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 500,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [],
+    "restrictions": [],
+    "id": 93619,
+    "chat_link": "[&AgGzbQEA]",
+    "icon": "https://render.guildwars2.com/file/027D1D382447933D074BE45F405EA1F379471DEB/63127.png",
+    "details": {
+      "type": "Generic"
+    }
+  },
+  "65447": {
+    "name": "Champion Dredge Loot Box",
+    "description": "This champion container has champion bags, dragonite ore, and empyreal fragments.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "Pvp",
+      "PvpLobby",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 65447,
+    "chat_link": "[&AgGn/wAA]",
+    "icon": "https://render.guildwars2.com/file/C87FF074456D2CCA56DCD89D35084501B00E6636/780323.png",
+    "details": {
+      "type": "Default"
+    }
+  },
+  "93508": {
+    "name": "Iron Legion Reward Box",
+    "description": "Double-click to open.\nContains 50 Dragonite Ore, 50 Empyreal Fragments, 2 Mystic Clovers, 8 Obsidian Shards, and a choice of valuable items from the Iron Legion.",
+    "type": "Container",
+    "level": 0,
+    "rarity": "Basic",
+    "vendor_value": 0,
+    "game_types": [
+      "PvpLobby",
+      "Activity",
+      "Wvw",
+      "Dungeon",
+      "Pve"
+    ],
+    "flags": [
+      "AccountBound",
+      "NoMysticForge",
+      "NoSalvage",
+      "NoSell",
+      "AccountBindOnUse"
+    ],
+    "restrictions": [],
+    "id": 93508,
+    "chat_link": "[&AgFEbQEA]",
+    "icon": "https://render.guildwars2.com/file/9970DF075906DAEDD3DC2773521D189DFC39FEBF/2292715.png",
+    "details": {
+      "type": "Default"
+    }
+  }
+}
