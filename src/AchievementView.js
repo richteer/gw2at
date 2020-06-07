@@ -6,6 +6,9 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Dropdown from 'react-bootstrap/Dropdown'
 
+import Popover from 'react-bootstrap/Popover'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+
 // TODO: Remove this
 import tiered_rewards from './tiered_rewards.json'
 import item_data from './item_data.json'
@@ -91,21 +94,32 @@ class AchievementView extends React.Component {
 						</Dropdown>
 					</Col>
 					<Col sm="auto">
-					<div style={{
-							width: "200px",
-							height: "48px",
-							alignItems: "center",
-							justifyContent: "left",
-							display: "flex"
-							}}>
-						{(ach.flags.indexOf("Repeatable") >= 0) ? 
-							<img
-								src="https://wiki.guildwars2.com/images/0/01/Black_Lion_Trading_Company_currency_exchange_icon.png"
-								width={24} height={24}
-								alt="Repeatable Achievement"/>
-						: ""}
-						{ach.name}
-					</div>
+						<OverlayTrigger
+							placement="left"
+							delay={{ show: 150, hide: 250 }}
+							overlay={
+								<Popover id={"pop-"+ach.id}>
+									<Popover.Title>{ach.requirement}</Popover.Title>
+									<Popover.Content><i>{ach.description}</i></Popover.Content>
+								</Popover>
+							}
+						>
+							<div style={{
+									width: "200px",
+									height: "48px",
+									alignItems: "center",
+									justifyContent: "left",
+									display: "flex"
+									}}>
+								{(ach.flags.indexOf("Repeatable") >= 0) ? 
+									<img
+										src="https://wiki.guildwars2.com/images/0/01/Black_Lion_Trading_Company_currency_exchange_icon.png"
+										width={24} height={24}
+										alt="Repeatable Achievement"/>
+								: ""}
+								{ach.name}
+							</div>
+						</OverlayTrigger>
 					</Col>
 					<Col sm="auto" style={{
 							width: "120px",

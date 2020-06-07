@@ -73,8 +73,8 @@ class AchievementViewTabs extends React.Component {
 	selectAchievement(ach_id) {
     this.setState(state => {
         const tmp = state.tabs[state.activeTab]
-        // Don't add if already tracked in this tab
-        if (tmp.indexOf(ach_id) >= 0) {
+        // Don't add if tab doesn't exist or if achievement already tracked in this tab
+        if (tmp === undefined || tmp.indexOf(ach_id) >= 0) {
           return {}
         }
         var tracked = [...tmp, ach_id]
