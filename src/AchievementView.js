@@ -113,7 +113,7 @@ class AchievementView extends React.Component {
 							justifyContent: "left",
 							display: "flex"
 							}}>
-						{"" + this.props.current[ach.id]?.current + " / " + ach.tiers.slice(-1)[0].count}
+						{"" + ((this.props.current[ach.id]) ? this.props.current[ach.id].current : "0") + " / " + ach.tiers.slice(-1)[0].count}
 					</Col>
 					<Col style={{
 							display: "flex",

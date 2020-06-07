@@ -196,7 +196,7 @@ class AchievementSelector extends React.Component {
 											key={"achieve-select-" + ach.id}
 											variant={(!this.props.playerAchieves[ach.id]) ? "light"
 												: ((this.props.playerAchieves[ach.id].done) ? "success" : "")}
-											onClick={() => this.props.selectAchievement(ach.id)}>
+											onClick={() => {console.log(this.props.selectAchievement); this.props.selectAchievement.current.selectAchievement(ach.id)}}>
 											<div>{ach.name}
 											{(ach.flags.indexOf("Repeatable") >= 0) ? 
 												<img
