@@ -100,7 +100,7 @@ class AchievementView extends React.Component {
 							overlay={
 								<Popover id={"pop-"+ach.id}>
 									<Popover.Title>{ach.requirement}</Popover.Title>
-									<Popover.Content><i>{ach.description}</i></Popover.Content>
+									<Popover.Content dangerouslySetInnerHTML={{__html:"<i>"+ach.description+"</i>"}}></Popover.Content>
 								</Popover>
 							}
 						>
