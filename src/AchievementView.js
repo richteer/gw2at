@@ -75,7 +75,7 @@ class AchievementView extends React.Component {
 				{
 				this.props.achievements
 					.map(ach => (
-				<Row key={"ap-"+ach.id}>
+				<Row key={"ap-"+ach.id} style={{padding:"3px"}}>
 					<Col sm="auto" style={{display: "flex", alignItems:"center", justifyContent:"center"}}>
 						<Dropdown>
 							<Dropdown.Toggle size="sm" block variant="outline-light">
@@ -109,7 +109,8 @@ class AchievementView extends React.Component {
 									height: "48px",
 									alignItems: "center",
 									justifyContent: "left",
-									display: "flex"
+									display: "flex",
+									lineHeight: "1.2"
 									}}>
 								{(ach.flags.indexOf("Repeatable") >= 0) ? 
 									<img
