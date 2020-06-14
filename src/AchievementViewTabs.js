@@ -138,9 +138,10 @@ class AchievementViewTabs extends React.Component {
 						5286
 					]
 			},
-			newTab: "",
 			showTabNav: false
 		}
+
+		this.addTabRef = React.createRef()
 
 	}
 
@@ -148,18 +149,18 @@ class AchievementViewTabs extends React.Component {
 		this.loadStateFromStorage()
 	}
 
-  onTabNameChange(e) {
-    this.setState({newTab: e.target.value});
-  }
-
   addTab(e) {
+		if (!this.addTabRef.current.value) {
+			return;
+		}
+
     this.setState(state => {
       var newtabs = {
         ...state.tabs
       }
-      newtabs[state.newTab] = []
+      newtabs[this.addTabRef.current.value] = []
 
-      return {tabs:newtabs, newTab:""}
+      return {tabs: newtabs}
     }, () => (this.saveStateToStorage()))
     e.preventDefault()
   }
@@ -186,7 +187,7 @@ class AchievementViewTabs extends React.Component {
       var newtabs = {}
       Object.entries(this.state.tabs).filter(tab => tab[0] !== e).forEach(tab => {newtabs[tab[0]] = tab[1]})
 
-      return {tabs:newtabs}
+      return {tabs: newtabs}
     }, () => (this.saveStateToStorage()))
 	}
 
@@ -318,7 +319,7 @@ class AchievementViewTabs extends React.Component {
 					<Form onSubmit={this.addTab.bind(this)}>
 						<Form.Row>
 							<Col>
-									<Form.Control type="text" placeholder="New Tab" value={this.state.newTab} onChange={this.onTabNameChange.bind(this)}/>
+									<Form.Control type="text" placeholder="New Tab" ref={this.addTabRef}/>
 							</Col>
 							<Col sm="auto" style={{display: "flex", alignItems:"left", justifyContent:"center"}}>
 								<Button variant="primary" type="submit">Add</Button>
