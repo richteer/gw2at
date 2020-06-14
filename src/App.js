@@ -49,6 +49,7 @@ class App extends React.Component {
         error: "Hi! Set an API key above, and complain to me later when it's not there after a page refresh",
         achieves: {},
         lastUpdate: 0,
+        apikey: null,
         achieveViewRef: React.createRef() // TODO: Does this really need to be in state?
       }
 
@@ -99,7 +100,10 @@ class App extends React.Component {
         }
         else {
           console.log(result)
-          this.setState({error: `${result.status} ${result.statusText}`})
+          this.setState({
+            error: `${result.status} ${result.statusText}`,
+            apikey: null
+          })
           this.setAutoUpdate(0) // Cancel any auto-update features
         }        
       })
@@ -112,16 +116,22 @@ class App extends React.Component {
   }
 
   updateApiKey() {
-    // Only do a partial update for tracked achievements after the first full pull
-    /*
-    if (this.state.achieves) {
-      this.getAchievementData(this.apiKeyRef.current.value, this.state.tracked)
+    this.clearError()
+
+    // Sure hope this never has to be debugged...
+    if (!this.apiKeyRef.current.value.match(
+      /([\dA-F]{8}-([\dA-F]{4}-){3}[\dA-F]{12}){2}/i
+      )) {
+      this.setState({error: "Invalid API key format, should look like: " +
+        "00000000-AAAA-1234-8675-01189998819991197253-6969-0420-EEEE-DEADBEEFCAFE"
+      })
       return
     }
-    */
-    this.clearError()
-    localStorage.setItem("apikey", this.apiKeyRef.current.value)
-    this.getAchievementData(this.apiKeyRef.current.value, [])
+
+    this.setState({apikey: this.apiKeyRef.current.value}, () => {
+      localStorage.setItem("apikey", this.state.apikey)
+      this.getAchievementData(this.state.apikey, [])
+    })
   }
 
   setAutoUpdate(minutes) {
@@ -147,7 +157,7 @@ class App extends React.Component {
     return function() {
       var nextUpdate = this.state.lastUpdate + (minutes * 60 * 1000)
       if (Date.now() >= nextUpdate) {
-        this.getAchievementData(this.apiKeyRef.current.value, [])
+        this.getAchievementData(this.state.apikey, [])
       }
 
       nextUpdate -= Date.now()            // Remaining ms
