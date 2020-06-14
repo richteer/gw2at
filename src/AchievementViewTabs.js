@@ -46,28 +46,10 @@ function sortByName(ach_data, ach_prog) {
 
 
 class TabsOptionsNav extends React.Component {
-	constructor(props) {
-		super(props)
-
-		this.state = {
-			showTabNav: false
-		}
-	}
-
 	render() {
 		return (
-			<Nav>
-				<Nav.Item>
-					<Nav.Link eventKey={`ev-nav-toggle-${this.props.tab}`}
-										onSelect={() =>
-											this.setState((s) => ({showTabNav: !s.showTabNav}))
-										}>
-						<img src="https://wiki.guildwars2.com/images/2/25/Game_menu_options_icon.png"
-								alt="Show Tab Options"
-								width={24} height={24}/>
-					</Nav.Link>
-				</Nav.Item>
-				<NavDropdown	hidden={!this.state.showTabNav}
+			<Nav hidden={this.props.show}>
+				<NavDropdown
 											title="Sort by"
 											id={`nav-sort-${this.props.tab}`}
 											onSelect={(e) =>
@@ -79,19 +61,19 @@ class TabsOptionsNav extends React.Component {
 					<NavDropdown.Item eventKey="+name">Name A-Z</NavDropdown.Item>
 					<NavDropdown.Item eventKey="-name">Name Z-A</NavDropdown.Item>
 				</NavDropdown>
-				<Nav.Item hidden={!this.state.showTabNav}>
+				<Nav.Item>
 					<Nav.Link eventKey={`ev-clear-${this.props.tab}`}
 										onSelect={() => this.props.clearCompleted(this.props.tab)}>
 						Clear Completed
 					</Nav.Link>
 				</Nav.Item>
-				<Nav.Item hidden={!this.state.showTabNav}>
+				<Nav.Item>
 					<Nav.Link eventKey={`ev-rename-${this.props.tab}`}
 										onSelect={() => this.props.renameTab(this.props.tab)}>
 						Rename Tab
 					</Nav.Link>
 				</Nav.Item>
-				<Nav.Item hidden={!this.state.showTabNav}>
+				<Nav.Item>
 					<Nav.Link eventKey={`ev-remove-${this.props.tab}`}
 										onSelect={() => this.props.removeTab(this.props.tab)}>
 						Remove Tab
@@ -123,7 +105,8 @@ class AchievementViewTabs extends React.Component {
 						5286
 					]
 			},
-			newTab: ""
+			newTab: "",
+			showTabNav: false
 		}
 
 	}
@@ -243,7 +226,28 @@ class AchievementViewTabs extends React.Component {
 
 	render() {
 		return (
-			<Tabs onSelect={(e) => this.setState({activeTab: e.replace("key-", "")})}>
+			<Tabs onSelect={(e) => {
+					/* This is a delicious hack...
+					 * Manually handle tab switching, intercept switching the options tab so it functions as a
+					 * button without having to do any weird layouting stuff.
+					 */
+					if (e === "show-tab-options") {
+						this.setState((state) => ({showTabNav: !state.showTabNav}), ()=>console.log(this.state));
+					}
+					else {
+						this.setState({activeTab: e.replace("key-", "")})
+					}
+				}}
+				activeKey={"key-" + this.state.activeTab}
+				defaultActiveKey={"key-" + Object.keys(this.state.tabs)[0]}>
+				<Tab
+					eventKey="show-tab-options"
+					title={
+							<img src="https://wiki.guildwars2.com/images/2/25/Game_menu_options_icon.png"
+								alt="Show Tab Options"
+								width={24} height={24}/>
+					}>
+				</Tab>
 				{
 					Object.entries(this.state.tabs).map(tab => (
 					<Tab eventKey={`key-${tab[0]}`} key={`tab-${tab[0]}`} title={tab[0]}>
@@ -254,6 +258,7 @@ class AchievementViewTabs extends React.Component {
 							renameTab={this.renameTab.bind(this)}
 							sortTab={this.sortTab.bind(this)}
 							tab={tab[0]}
+							show={!this.state.showTabNav}
 							/>
 						<AchievementView
 							achievements={tab[1].map(a => achievement_data[a]).filter(a => a)}
@@ -262,7 +267,7 @@ class AchievementViewTabs extends React.Component {
 							/>
 					</Tab>
 				))}
-				<Tab eventKey="new_tab" title="+">
+				<Tab eventKey="key-new-tab" title="+">
 					<Form onSubmit={this.addTab.bind(this)}>
 						<Form.Row>
 							<Col>
