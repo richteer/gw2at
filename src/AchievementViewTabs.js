@@ -5,8 +5,9 @@ import Tabs from 'react-bootstrap/Tabs'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 //import Row from 'react-bootstrap/Row'
-import Dropdown from 'react-bootstrap/Dropdown'
+import Nav from 'react-bootstrap/Nav'
 import Col from 'react-bootstrap/Col'
+
 
 import AchievementView from './AchievementView'
 
@@ -33,7 +34,8 @@ class AchievementViewTabs extends React.Component {
 						5286
 					]
 			},
-			newTab: ""
+			newTab: "",
+			showTabNav: false
 		}
 
 	}
@@ -130,28 +132,31 @@ class AchievementViewTabs extends React.Component {
 			<Tabs onSelect={(e) => this.setState({activeTab: e.replace("key-", "")})}>
 				{
 					Object.entries(this.state.tabs).map(tab => (
-					<Tab eventKey={`key-${tab[0]}`} title={tab[0]}>
-						<Dropdown>
-							<Dropdown.Toggle size="sm" block variant="outline-light">
-								<img src="https://wiki.guildwars2.com/images/2/25/Game_menu_options_icon.png"
-										alt="Achivement Options"
-										width={24} height={24}/>
-							</Dropdown.Toggle>
-							<Dropdown.Menu>
-								<Dropdown.Item onSelect={() => this.renameTab(tab[0])}>
-									<img src="https://wiki.guildwars2.com/images/c/c9/Closed.png"
-										width={24} height={24}
-										alt="Rename Tab"/>
-										Rename Tab
-								</Dropdown.Item>
-								<Dropdown.Item onSelect={() => this.removeTab(tab[0])}>
-									<img src="https://wiki.guildwars2.com/images/c/c9/Closed.png"
-										width={24} height={24}
-										alt="Remove Tab"/>
-										Remove Tab
-								</Dropdown.Item>
-							</Dropdown.Menu>
-						</Dropdown>
+					<Tab eventKey={`key-${tab[0]}`} key={`tab-${tab[0]}`} title={tab[0]}>
+						<Nav>
+							<Nav.Item>
+								<Nav.Link eventKey={`ev-nav-toggle-${tab[0]}`}
+													onSelect={() => 
+														this.setState((s) => ({showTabNav: !s.showTabNav}))
+													}>
+									<img src="https://wiki.guildwars2.com/images/2/25/Game_menu_options_icon.png"
+											alt="Show Tab Options"
+											width={24} height={24}/>
+								</Nav.Link>
+							</Nav.Item>
+							<Nav.Item hidden={!this.state.showTabNav}>
+								<Nav.Link eventKey={`ev-rename-${tab[0]}`}
+													onSelect={() => this.renameTab(tab[0])}>
+									Rename Tab
+								</Nav.Link>
+							</Nav.Item>
+							<Nav.Item hidden={!this.state.showTabNav}>
+								<Nav.Link eventKey={`ev-remove-${tab[0]}`}
+													onSelect={() => this.removeTab(tab[0])}>
+									Remove Tab
+								</Nav.Link>
+							</Nav.Item>
+						</Nav>
 						<AchievementView
 							achievements={tab[1].map(a => achievement_data[a]).filter(a => a)}
 							current={this.props.achieves}
