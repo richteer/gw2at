@@ -75,7 +75,7 @@ class AchievementView extends React.Component {
 				{
 				this.props.achievements
 					.map(ach => (
-				<Row key={"ap-"+ach.id} style={{padding:"3px"}}>
+				<Row key={"ap-"+ach.id} style={{padding:"3px"}} className={(this.props.current[ach.id]?.done) ? "alert-success" : ""}>
 					<Col sm="auto" style={{display: "flex", alignItems:"center", justifyContent:"center"}}>
 						<Dropdown>
 							<Dropdown.Toggle size="sm" block variant="outline-light">
