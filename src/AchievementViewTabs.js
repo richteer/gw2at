@@ -14,6 +14,52 @@ import AchievementView from './AchievementView'
 // TODO: check if these imports actually increase memory usage
 import achievement_data from './achievement_data.json'
 
+class TabsOptionsNav extends React.Component {
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			showTabNav: false
+		}
+	}
+
+	render() {
+		return (
+			<Nav>
+				<Nav.Item>
+					<Nav.Link eventKey={`ev-nav-toggle-${this.props.tab}`}
+										onSelect={() =>
+											this.setState((s) => ({showTabNav: !s.showTabNav}))
+										}>
+						<img src="https://wiki.guildwars2.com/images/2/25/Game_menu_options_icon.png"
+								alt="Show Tab Options"
+								width={24} height={24}/>
+					</Nav.Link>
+				</Nav.Item>
+				<Nav.Item hidden={!this.state.showTabNav}>
+					<Nav.Link eventKey={`ev-clear-${this.props.tab}`}
+										onSelect={() => this.props.clearCompleted(this.props.tab)}>
+						Clear Completed
+					</Nav.Link>
+				</Nav.Item>
+				<Nav.Item hidden={!this.state.showTabNav}>
+					<Nav.Link eventKey={`ev-rename-${this.props.tab}`}
+										onSelect={() => this.props.renameTab(this.props.tab)}>
+						Rename Tab
+					</Nav.Link>
+				</Nav.Item>
+				<Nav.Item hidden={!this.state.showTabNav}>
+					<Nav.Link eventKey={`ev-remove-${this.props.tab}`}
+										onSelect={() => this.props.removeTab(this.props.tab)}>
+						Remove Tab
+					</Nav.Link>
+				</Nav.Item>
+			</Nav>
+		)
+	}
+}
+
+
 class AchievementViewTabs extends React.Component {
 	constructor(props) {
 		super(props)
@@ -34,8 +80,7 @@ class AchievementViewTabs extends React.Component {
 						5286
 					]
 			},
-			newTab: "",
-			showTabNav: false
+			newTab: ""
 		}
 
 	}
@@ -145,36 +190,13 @@ class AchievementViewTabs extends React.Component {
 				{
 					Object.entries(this.state.tabs).map(tab => (
 					<Tab eventKey={`key-${tab[0]}`} key={`tab-${tab[0]}`} title={tab[0]}>
-						<Nav>
-							<Nav.Item>
-								<Nav.Link eventKey={`ev-nav-toggle-${tab[0]}`}
-													onSelect={() => 
-														this.setState((s) => ({showTabNav: !s.showTabNav}))
-													}>
-									<img src="https://wiki.guildwars2.com/images/2/25/Game_menu_options_icon.png"
-											alt="Show Tab Options"
-											width={24} height={24}/>
-								</Nav.Link>
-							</Nav.Item>
-							<Nav.Item hidden={!this.state.showTabNav}>
-								<Nav.Link eventKey={`ev-clear-${tab[0]}`}
-													onSelect={() => this.clearCompleted(tab[0])}>
-									Clear Completed
-								</Nav.Link>
-							</Nav.Item>
-							<Nav.Item hidden={!this.state.showTabNav}>
-								<Nav.Link eventKey={`ev-rename-${tab[0]}`}
-													onSelect={() => this.renameTab(tab[0])}>
-									Rename Tab
-								</Nav.Link>
-							</Nav.Item>
-							<Nav.Item hidden={!this.state.showTabNav}>
-								<Nav.Link eventKey={`ev-remove-${tab[0]}`}
-													onSelect={() => this.removeTab(tab[0])}>
-									Remove Tab
-								</Nav.Link>
-							</Nav.Item>
-						</Nav>
+						{/* TODO: maybe clean these callbacks? it seems pretty...inelegant */}
+						<TabsOptionsNav
+							clearCompleted={this.clearCompleted.bind(this)}
+							removeTab={this.removeTab.bind(this)}
+							renameTab={this.renameTab.bind(this)}
+							tab={tab[0]}
+							/>
 						<AchievementView
 							achievements={tab[1].map(a => achievement_data[a]).filter(a => a)}
 							current={this.props.achieves}
