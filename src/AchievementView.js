@@ -1,12 +1,12 @@
 import React from 'react'
 import TieredAchieveProgress from './TieredAchieveProgress'
 import AchieveProgress from './AchieveProgress'
+import AchievementTooltip from './AchievementTooltip'
 
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
-import Popover from 'react-bootstrap/Popover'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
 // TODO: Remove this
@@ -80,13 +80,10 @@ class AchievementView extends React.Component {
 				<Row key={"ap-"+ach.id} style={{padding:"3px"}} className={(this.props.current[ach.id]?.done) ? "alert-success" : ""}>
 					<Col sm="auto">
 						<OverlayTrigger
-							placement="left"
+							placement="right"
 							delay={{ show: 150, hide: 250 }}
 							overlay={
-								<Popover id={"pop-"+ach.id}>
-									<Popover.Title>{ach.requirement}</Popover.Title>
-									<Popover.Content dangerouslySetInnerHTML={{__html:"<i>"+ach.description+"</i>"}}></Popover.Content>
-								</Popover>
+								<AchievementTooltip achievement={ach}/>
 							}
 						>
 							<div style={{
