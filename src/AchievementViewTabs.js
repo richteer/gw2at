@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 //import Row from 'react-bootstrap/Row'
 import Nav from 'react-bootstrap/Nav'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 import Col from 'react-bootstrap/Col'
 
 
@@ -13,6 +14,36 @@ import AchievementView from './AchievementView'
 
 // TODO: check if these imports actually increase memory usage
 import achievement_data from './achievement_data.json'
+
+// Table of sort functions to use
+// Each should take in achievement progress and data, and return a function
+//  that sorts accordingly over achievement ID values
+const sortfuncs = {
+	progress: sortByProgress,
+	name: sortByName
+}
+
+// Sorts by achievement progress % complete
+//   Sorts closer-to-complete achievements at the top by default
+function sortByProgress(ach_data, ach_prog) {
+	return (a,b) => {
+		var ta = ach_prog[a]
+		var tb = ach_prog[b]
+
+		// We may have no progress data yet, so filter those accordingly
+		if (!ta) return 1;
+		if (!tb) return -1;
+
+		return (tb.current / tb.max) - (ta.current / ta.max)
+	}
+}
+
+function sortByName(ach_data, ach_prog) {
+	return (a,b) => {
+		return ach_data[a].name.localeCompare(ach_data[b].name)
+	}
+}
+
 
 class TabsOptionsNav extends React.Component {
 	constructor(props) {
@@ -36,6 +67,13 @@ class TabsOptionsNav extends React.Component {
 								width={24} height={24}/>
 					</Nav.Link>
 				</Nav.Item>
+				<NavDropdown	hidden={!this.state.showTabNav}
+											title="Sort by"
+											id={`nav-sort-${this.props.tab}`}
+											onSelect={(e) => this.props.sortTab(this.props.tab, sortfuncs[e])}>
+					<NavDropdown.Item eventKey="progress">Progress</NavDropdown.Item>
+					<NavDropdown.Item eventKey="name">Name</NavDropdown.Item>
+				</NavDropdown>
 				<Nav.Item hidden={!this.state.showTabNav}>
 					<Nav.Link eventKey={`ev-clear-${this.props.tab}`}
 										onSelect={() => this.props.clearCompleted(this.props.tab)}>
@@ -117,6 +155,18 @@ class AchievementViewTabs extends React.Component {
     }, () => (this.saveStateToStorage()))
 	}
 
+	sortTab(tab, sortfunc) {
+		this.setState(state => {
+			var tabs = state.tabs
+			var curr = tabs[tab]
+
+			curr.sort(sortfunc(achievement_data, this.props.achieves))
+
+			tabs[tab] = curr
+			return {tabs: tabs}
+		})
+	}
+
 	clearCompleted(tab) {
 		this.setState((state) => {
 			var tabs = state.tabs
@@ -195,6 +245,7 @@ class AchievementViewTabs extends React.Component {
 							clearCompleted={this.clearCompleted.bind(this)}
 							removeTab={this.removeTab.bind(this)}
 							renameTab={this.renameTab.bind(this)}
+							sortTab={this.sortTab.bind(this)}
 							tab={tab[0]}
 							/>
 						<AchievementView
