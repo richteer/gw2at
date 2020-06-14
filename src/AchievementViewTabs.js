@@ -70,9 +70,14 @@ class TabsOptionsNav extends React.Component {
 				<NavDropdown	hidden={!this.state.showTabNav}
 											title="Sort by"
 											id={`nav-sort-${this.props.tab}`}
-											onSelect={(e) => this.props.sortTab(this.props.tab, sortfuncs[e])}>
-					<NavDropdown.Item eventKey="progress">Progress</NavDropdown.Item>
-					<NavDropdown.Item eventKey="name">Name</NavDropdown.Item>
+											onSelect={(e) =>
+												// I hate this.
+												this.props.sortTab(this.props.tab, sortfuncs[e.slice(1)], !!(e[0]==="-"))
+											}>
+					<NavDropdown.Item eventKey="+progress">Progress Desc</NavDropdown.Item>
+					<NavDropdown.Item eventKey="-progress">Progress Asc</NavDropdown.Item>
+					<NavDropdown.Item eventKey="+name">Name A-Z</NavDropdown.Item>
+					<NavDropdown.Item eventKey="-name">Name Z-A</NavDropdown.Item>
 				</NavDropdown>
 				<Nav.Item hidden={!this.state.showTabNav}>
 					<Nav.Link eventKey={`ev-clear-${this.props.tab}`}
@@ -155,12 +160,14 @@ class AchievementViewTabs extends React.Component {
     }, () => (this.saveStateToStorage()))
 	}
 
-	sortTab(tab, sortfunc) {
+	// TODO: This whole sorting logic desperately needs to be optimized
+	sortTab(tab, sortfunc, reverse) {
 		this.setState(state => {
 			var tabs = state.tabs
 			var curr = tabs[tab]
 
 			curr.sort(sortfunc(achievement_data, this.props.achieves))
+			if (reverse) curr.reverse()
 
 			tabs[tab] = curr
 			return {tabs: tabs}
