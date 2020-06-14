@@ -6,6 +6,9 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+
+import AchievementTooltip from './AchievementTooltip'
 
 import all_groups from './achievement_groups.json'
 import all_categories from './achievement_categories.json'
@@ -185,31 +188,37 @@ class AchievementSelector extends React.Component {
 									.sort(sortByName(this.props.playerAchieves))
 									.sort(sortByDone(this.props.playerAchieves))
 									.map((ach) => (
-										<ListGroup.Item
-											action
-											style={{
-												display: "flex",
-												alignItems: "center",
-												justifyContent: "space-between",
-												fontSize: "10pt"
-											}}
-											key={"achieve-select-" + ach.id}
-											variant={(!this.props.playerAchieves[ach.id]) ? "light"
-												: ((this.props.playerAchieves[ach.id].done) ? "success" : "")}
-											onClick={() => {console.log(this.props.selectAchievement); this.props.selectAchievement.current.selectAchievement(ach.id)}}>
-											<div>{ach.name}
-											{(ach.flags.indexOf("Repeatable") >= 0) ? 
-												<img
-													src="https://wiki.guildwars2.com/images/0/01/Black_Lion_Trading_Company_currency_exchange_icon.png"
-													width={24} height={24}
-													alt="Repeatable Achievement"/>
-											: ""}
-											</div>
-											{
-												(this.props.playerAchieves[ach.id]?.done) ? "" :
-													this.getMasteryPointIcon(ach.id)
-											}
-										</ListGroup.Item>
+										<OverlayTrigger
+												overlay={<AchievementTooltip achievement={ach}/>}
+												placement="right"
+												transition={false}
+												>
+											<ListGroup.Item
+												action
+												style={{
+													display: "flex",
+													alignItems: "center",
+													justifyContent: "space-between",
+													fontSize: "10pt"
+												}}
+												key={"achieve-select-" + ach.id}
+												variant={(!this.props.playerAchieves[ach.id]) ? "light"
+													: ((this.props.playerAchieves[ach.id].done) ? "success" : "")}
+												onClick={() => {console.log(this.props.selectAchievement); this.props.selectAchievement.current.selectAchievement(ach.id)}}>
+												<div>{ach.name}
+												{(ach.flags.indexOf("Repeatable") >= 0) ?
+													<img
+														src="https://wiki.guildwars2.com/images/0/01/Black_Lion_Trading_Company_currency_exchange_icon.png"
+														width={24} height={24}
+														alt="Repeatable Achievement"/>
+												: ""}
+												</div>
+												{
+													(this.props.playerAchieves[ach.id]?.done) ? "" :
+														this.getMasteryPointIcon(ach.id)
+												}
+											</ListGroup.Item>
+										</OverlayTrigger>
 									))
 							}
 						</ListGroup>
