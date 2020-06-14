@@ -10,8 +10,9 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 import Col from 'react-bootstrap/Col'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
-
 import AchievementView from './AchievementView'
+
+import './NewTab.css'
 
 // TODO: check if these imports actually increase memory usage
 import achievement_data from './achievement_data.json'
@@ -313,7 +314,7 @@ class AchievementViewTabs extends React.Component {
 							/>
 					</Tab>
 				))}
-				<Tab eventKey="key-new-tab" title="+">
+				<Tab eventKey="key-new-tab" title={<div className="NewTab">+</div>}>
 					<Form onSubmit={this.addTab.bind(this)}>
 						<Form.Row>
 							<Col>
