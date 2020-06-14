@@ -8,7 +8,8 @@ import Form from 'react-bootstrap/Form'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Col from 'react-bootstrap/Col'
-
+import InputGroup from 'react-bootstrap/InputGroup'
+import FormControl from 'react-bootstrap/FormControl'
 
 import AchievementView from './AchievementView'
 
@@ -46,6 +47,16 @@ function sortByName(ach_data, ach_prog) {
 
 
 class TabsOptionsNav extends React.Component {
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			showRename: false
+		}
+
+		this.renameRef = React.createRef()
+	}
+
 	render() {
 		return (
 			<Nav hidden={this.props.show}>
@@ -70,8 +81,28 @@ class TabsOptionsNav extends React.Component {
 				</Nav.Item>
 				<Nav.Item>
 					<Nav.Link eventKey={`ev-rename-${this.props.tab}`}
-										onSelect={() => this.props.renameTab(this.props.tab)}>
-						Rename Tab
+										onSelect={() => {
+												if (this.state.showRename) return
+												this.setState((state) => ({showRename: !state.showRename}))
+											}
+										}>
+						<span hidden={this.state.showRename}>
+							Rename Tab
+						</span>
+						<InputGroup hidden={!this.state.showRename}>
+                <FormControl
+									placeholder="New Tab Name"
+									ref={this.renameRef}
+                />
+                <InputGroup.Append>
+                  <Button variant="primary" onClick={() => {
+											this.props.renameTab(this.props.tab, this.renameRef.current.value)
+											this.setState({showRename: false})
+										}
+									}>Rename</Button>
+									<Button variant="secondary" onClick={() => this.setState((state) => ({showRename: false}))}>Cancel</Button>
+                </InputGroup.Append>
+              </InputGroup>
 					</Nav.Link>
 				</Nav.Item>
 				<Nav.Item>
@@ -132,8 +163,22 @@ class AchievementViewTabs extends React.Component {
     e.preventDefault()
   }
 
-  renameTab(e) {
-  }
+  renameTab(oldTab, newTab) {
+		if (this.state.tabs[newTab]) {
+			console.error("Duplicate name detected, rejecting rename")
+			console.error("TODO: display this error to a user")
+			return
+		}
+
+		this.setState((state) => {
+			var {[oldTab]: oldData, ...rest} = state.tabs
+
+			return {
+				tabs: {[newTab]: oldData, ...rest},
+				activeTab: newTab,
+			}
+		}, () => this.saveStateToStorage())
+	}
 
   removeTab(e) {
     this.setState(state => {
