@@ -58,6 +58,7 @@ class TabsOptionsNav extends React.Component {
 											}>
 					<NavDropdown.Item eventKey="+progress">Progress Desc</NavDropdown.Item>
 					<NavDropdown.Item eventKey="-progress">Progress Asc</NavDropdown.Item>
+					<NavDropdown.Divider />
 					<NavDropdown.Item eventKey="+name">Name A-Z</NavDropdown.Item>
 					<NavDropdown.Item eventKey="-name">Name Z-A</NavDropdown.Item>
 				</NavDropdown>
