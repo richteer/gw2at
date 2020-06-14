@@ -70,7 +70,19 @@ class AchievementViewTabs extends React.Component {
 
       return {tabs:newtabs}
     }, () => (this.saveStateToStorage()))
-  }
+	}
+
+	clearCompleted(tab) {
+		this.setState((state) => {
+			var tabs = state.tabs
+			var curr = tabs[tab]
+
+			curr = curr.filter(a => !this.props.achieves[a]?.done)
+			tabs[tab] = curr
+
+			return {tabs: tabs}
+		}, () => (this.saveStateToStorage()))
+	}
 
 	selectAchievement(ach_id) {
     this.setState(state => {
@@ -142,6 +154,12 @@ class AchievementViewTabs extends React.Component {
 									<img src="https://wiki.guildwars2.com/images/2/25/Game_menu_options_icon.png"
 											alt="Show Tab Options"
 											width={24} height={24}/>
+								</Nav.Link>
+							</Nav.Item>
+							<Nav.Item hidden={!this.state.showTabNav}>
+								<Nav.Link eventKey={`ev-clear-${tab[0]}`}
+													onSelect={() => this.clearCompleted(tab[0])}>
+									Clear Completed
 								</Nav.Link>
 							</Nav.Item>
 							<Nav.Item hidden={!this.state.showTabNav}>
