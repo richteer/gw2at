@@ -11,6 +11,8 @@ import Col from 'react-bootstrap/Col'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
+import Navbar from 'react-bootstrap/Navbar'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const api_root = "https://api.guildwars2.com"
@@ -46,6 +48,7 @@ class App extends React.Component {
       this.state = {
         error: "Hi! Set an API key above, and complain to me later when it's not there after a page refresh",
         achieves: {},
+        lastUpdate: 0,
         achieveViewRef: React.createRef() // TODO: Does this really need to be in state?
       }
 
@@ -61,6 +64,8 @@ class App extends React.Component {
       this.apiKeyRef.current.value = apikey
       this.updateApiKey(apikey)
     }
+
+
   }
 
   updateAchievementData(data) {
@@ -71,7 +76,7 @@ class App extends React.Component {
     var newdata = {}
     data.forEach(d => {newdata[d.id] = d})
 
-    this.setState({"achieves": newdata})
+    this.setState({"achieves": newdata, lastUpdate: Date.now()})
   }
 
   getAchievementData(apikey, ids) {
@@ -95,6 +100,7 @@ class App extends React.Component {
         else {
           console.log(result)
           this.setState({error: `${result.status} ${result.statusText}`})
+          this.setAutoUpdate(0) // Cancel any auto-update features
         }        
       })
       .catch(error => {
@@ -118,6 +124,42 @@ class App extends React.Component {
     this.getAchievementData(this.apiKeyRef.current.value, [])
   }
 
+  setAutoUpdate(minutes) {
+    minutes = parseInt(minutes)
+    clearInterval(this.autoUpdateInterval)
+    this.setState({autoUpdateEnabled: false})
+
+    // Special case to cancel current timer
+    if (minutes === 0) {
+      console.log("Cancelling update timer")
+      return
+    }
+
+    this.autoUpdateInterval = setInterval(this.autoUpdateFunc(minutes).bind(this), 1000)
+
+    // For now, kill all auto-updaters after a day
+    setTimeout(() => clearInterval(this.autoUpdateInterval), 24 * 60 * 1000)
+
+    this.setState({autoUpdateEnabled: true, nextUpdateCountDown: minutes * 60})
+  }
+
+  autoUpdateFunc(minutes) {
+    return function() {
+      var nextUpdate = this.state.lastUpdate + (minutes * 60 * 1000)
+      if (Date.now() >= nextUpdate) {
+        this.getAchievementData(this.apiKeyRef.current.value, [])
+      }
+
+      nextUpdate -= Date.now()            // Remaining ms
+      nextUpdate /= 1000                  // Remaining seconds
+      nextUpdate = Math.ceil(nextUpdate)  // Remaining seconds as integer
+      if (nextUpdate < 0)                 // Don't bother with negatives
+        nextUpdate = 0
+
+      this.setState((state) => ({nextUpdateCountDown: nextUpdate}))
+    }
+  }
+
   clearError() {
     this.setState({"error" : ""})
   }
@@ -125,19 +167,38 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Container fluid>
+        <Navbar bg="dark" variant="dark">
+          <Navbar.Brand>GW2AT</Navbar.Brand>
+          <Navbar.Collapse className="justify-content-end">
+            <Navbar.Text>
+              <InputGroup>
+                <FormControl
+                  placeholder="API Key with achievements permission"
+                  ref={this.apiKeyRef}
+                />
+                <InputGroup.Append>
+                  <Button variant="primary" onClick={this.updateApiKey.bind(this)}>Update</Button>
+                </InputGroup.Append>
+              </InputGroup>
+            </Navbar.Text>
 
-        <Row>
-          <InputGroup className="mb-3">
-            <FormControl
-              placeholder="API Key with achievements permission"
-              ref={this.apiKeyRef}
-            />
-            <InputGroup.Append>
-              <Button variant="outline-secondary" onClick={this.updateApiKey.bind(this)}>Update</Button>
-            </InputGroup.Append>
-          </InputGroup>
-        </Row>
+            <NavDropdown title="Auto-update" id="auto-update-api"
+                onSelect={(k) => this.setAutoUpdate(k)}>
+              <NavDropdown.Item eventKey={10}>10 minutes</NavDropdown.Item>
+              <NavDropdown.Item eventKey={5}>5 minutes</NavDropdown.Item>
+              <NavDropdown.Item eventKey={1}>1 minute</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item eventKey={0}>Cancel</NavDropdown.Item>
+            </NavDropdown>
+
+            <Navbar.Text hidden={!this.state.autoUpdateEnabled}>
+              <span>
+                Next update: {this.state.nextUpdateCountDown}s
+              </span>
+            </Navbar.Text>
+
+          </Navbar.Collapse>
+        </Navbar>
         <Alert
           variant="danger"
           show={!!this.state.error}
@@ -147,21 +208,20 @@ class App extends React.Component {
           {this.state.error}
         </Alert>
 
-        <Row>
-          <Col sm="auto" style={{width: "400px"}}>
-            <AchievementSelector
-              selectAchievement={this.state.achieveViewRef}
-              playerAchieves={this.state.achieves}
-              />
-          </Col>
-          <Col>
-            <AchievementViewTabs
-              ref={this.state.achieveViewRef}
-              achieves={this.state.achieves}/>
-          </Col>
-        </Row>
-
-
+        <Container fluid>
+          <Row>
+            <Col sm="auto" style={{width: "400px"}}>
+              <AchievementSelector
+                selectAchievement={this.state.achieveViewRef}
+                playerAchieves={this.state.achieves}
+                />
+            </Col>
+            <Col>
+              <AchievementViewTabs
+                ref={this.state.achieveViewRef}
+                achieves={this.state.achieves}/>
+            </Col>
+          </Row>
         </Container>
       </div>
     );
