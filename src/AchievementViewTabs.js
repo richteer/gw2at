@@ -142,13 +142,13 @@ class AchievementViewTabs extends React.Component {
 									<img src="https://wiki.guildwars2.com/images/c/c9/Closed.png"
 										width={24} height={24}
 										alt="Rename Tab"/>
-										Rename
+										Rename Tab
 								</Dropdown.Item>
 								<Dropdown.Item onSelect={() => this.removeTab(tab[0])}>
 									<img src="https://wiki.guildwars2.com/images/c/c9/Closed.png"
 										width={24} height={24}
 										alt="Remove Tab"/>
-										Remove
+										Remove Tab
 								</Dropdown.Item>
 							</Dropdown.Menu>
 						</Dropdown>
