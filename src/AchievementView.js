@@ -4,7 +4,7 @@ import AchieveProgress from './AchieveProgress'
 
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Dropdown from 'react-bootstrap/Dropdown'
+import Button from 'react-bootstrap/Button'
 
 import Popover from 'react-bootstrap/Popover'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
@@ -12,6 +12,8 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 // TODO: Remove this
 import tiered_rewards from './tiered_rewards.json'
 import item_data from './item_data.json'
+
+import "./AchievementClose.css"
 
 
 // TODO: probably convert to CSS, have it be a general style override
@@ -76,23 +78,6 @@ class AchievementView extends React.Component {
 				this.props.achievements
 					.map(ach => (
 				<Row key={"ap-"+ach.id} style={{padding:"3px"}} className={(this.props.current[ach.id]?.done) ? "alert-success" : ""}>
-					<Col sm="auto" style={{display: "flex", alignItems:"center", justifyContent:"center"}}>
-						<Dropdown>
-							<Dropdown.Toggle size="sm" block variant="outline-light">
-								<img src="https://wiki.guildwars2.com/images/2/25/Game_menu_options_icon.png"
-										alt="Achivement Options"
-										width={24} height={24}/>
-							</Dropdown.Toggle>
-							<Dropdown.Menu>
-								<Dropdown.Item onSelect={() => this.props.deselectAchievement(ach.id)}>
-									<img src="https://wiki.guildwars2.com/images/c/c9/Closed.png"
-										width={24} height={24}
-										alt="Remove Achievement"/>
-										Remove
-								</Dropdown.Item>
-							</Dropdown.Menu>
-						</Dropdown>
-					</Col>
 					<Col sm="auto">
 						<OverlayTrigger
 							placement="left"
@@ -141,6 +126,12 @@ class AchievementView extends React.Component {
 							key={"ap-col-"+ach.id}
 							data={ach}
 							current={this.props.current[ach.id]} />
+					</Col>
+					<Col sm="auto">
+						<Button className="AchievementClose" style={{padding: ".75rem .75rem"}}
+							onClick={() => this.props.deselectAchievement(ach.id)}>
+							<span>×</span>
+						</Button>
 					</Col>
 				</Row>
 				))
