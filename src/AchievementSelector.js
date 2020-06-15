@@ -199,7 +199,8 @@ class AchievementSelector extends React.Component {
 													display: "flex",
 													alignItems: "center",
 													justifyContent: "space-between",
-													fontSize: "10pt"
+													fontSize: "10pt",
+													backgroundColor: "rgba(255,255,255,0.7)"
 												}}
 												key={"achieve-select-" + ach.id}
 												variant={(!this.props.playerAchieves[ach.id]) ? "light"
