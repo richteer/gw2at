@@ -13,7 +13,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import tiered_rewards from './tiered_rewards.json'
 import item_data from './item_data.json'
 
-import "./AchievementClose.css"
+import "./AchievementView.css"
 
 
 // TODO: probably convert to CSS, have it be a general style override
@@ -86,31 +86,21 @@ class AchievementView extends React.Component {
 								<AchievementTooltip achievement={ach}/>
 							}
 						>
-							<div style={{
-									width: "200px",
-									height: "48px",
-									alignItems: "center",
-									justifyContent: "left",
-									display: "flex",
-									lineHeight: "1.2"
-									}}>
+							<div className="achievement-name">
 								{(ach.flags.indexOf("Repeatable") >= 0) ? 
 									<img
 										src="https://wiki.guildwars2.com/images/0/01/Black_Lion_Trading_Company_currency_exchange_icon.png"
 										width={24} height={24}
 										alt="Repeatable Achievement"/>
-								: ""}
+								: <div style={{width: 24}}/>}
 								{ach.name}
 							</div>
 						</OverlayTrigger>
 					</Col>
-					<Col sm="auto" style={{
-							width: "120px",
-							alignItems: "center",
-							justifyContent: "left",
-							display: "flex"
-							}}>
+					<Col sm="auto">
+						<div className="achievement-progress">
 						{"" + ((this.props.current[ach.id]) ? this.props.current[ach.id].current : "0") + " / " + ach.tiers.slice(-1)[0].count}
+						</div>
 					</Col>
 					<Col style={{
 							display: "flex",

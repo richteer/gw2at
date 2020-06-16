@@ -1,0 +1,31 @@
+.achievement-name {
+  width: 200px;
+  height: 48px;
+  align-items: center;
+  justify-content: left;
+  display: flex;
+  line-height: 1.2;
+}
+
+.achievement-progress {
+  width: 60px;
+  height: 100%;
+  align-items: center;
+  justify-content: left;
+  display: flex;
+}
+
+.AchievementClose {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  text-shadow: 0 1px 0 #fff !important;
+  color: #444444 !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+.AchievementClose:hover {
+  background-color: #f8d7da !important;
+  border-color: #f5c6cb !important;
+}
