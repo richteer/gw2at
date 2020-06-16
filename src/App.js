@@ -185,6 +185,7 @@ class App extends React.Component {
                 <FormControl
                   placeholder="API Key with achievements permission"
                   ref={this.apiKeyRef}
+                  style={{width: "680px"}}
                 />
                 <InputGroup.Append>
                   <Button variant="primary" onClick={this.updateApiKey.bind(this)}>Update</Button>
