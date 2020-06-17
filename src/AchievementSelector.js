@@ -180,13 +180,13 @@ class AchievementSelector extends React.Component {
 							.map((ach) => (
 								<OverlayTrigger
 										overlay={<AchievementTooltip achievement={ach}/>}
+										key={"achieve-select-" + ach.id}
 										placement="right"
 										transition={false}
 										>
 									<ListGroup.Item
 										action
 										className="achievement-list-item"
-										key={"achieve-select-" + ach.id}
 										variant={(!this.props.playerAchieves[ach.id]) ? "light"
 											: ((this.props.playerAchieves[ach.id].done) ? "success" : "")}
 										onClick={() => {console.log(this.props.selectAchievement); this.props.selectAchievement.current.selectAchievement(ach.id)}}>
