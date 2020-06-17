@@ -73,12 +73,22 @@ class TabsOptionsNav extends React.Component {
 					<NavDropdown.Item eventKey="+name">Name A-Z</NavDropdown.Item>
 					<NavDropdown.Item eventKey="-name">Name Z-A</NavDropdown.Item>
 				</NavDropdown>
-				<Nav.Item>
-					<Nav.Link eventKey={`ev-clear-${this.props.tab}`}
+				<NavDropdown
+										title="Untrack..."
+										id={`nav-untrack-${this.props.tab}`}
+										>
+					<NavDropdown.Item
+										eventKey={`ev-clear-${this.props.tab}`}
 										onSelect={() => this.props.clearCompleted(this.props.tab)}>
-						Clear Completed
-					</Nav.Link>
-				</Nav.Item>
+						Completed
+					</NavDropdown.Item>
+					<NavDropdown.Divider/>
+					<NavDropdown.Item
+							className="nav-danger-item"
+							onSelect={() => this.props.removeAll(this.props.tab)}>
+						All
+					</NavDropdown.Item>
+				</NavDropdown>
 				<Nav.Item>
 					<Nav.Link eventKey={`ev-rename-${this.props.tab}`}
 										onSelect={() => {
@@ -216,6 +226,18 @@ class AchievementViewTabs extends React.Component {
 		}, () => (this.saveStateToStorage()))
 	}
 
+	// TODO: probably unify all deleting methods with a single function
+	//   that takes in a filter func
+	removeAll(tab) {
+		this.setState((state) => {
+			var tabs = state.tabs
+
+			tabs[tab] = []
+
+			return {tabs: tabs}
+		}, () => (this.saveStateToStorage()))
+	}
+
 	selectAchievement(ach_id) {
     this.setState(state => {
         const tmp = state.tabs[state.activeTab]
@@ -302,6 +324,7 @@ class AchievementViewTabs extends React.Component {
 							{/* TODO: maybe clean these callbacks? it seems pretty...inelegant */}
 							<TabsOptionsNav
 								clearCompleted={this.clearCompleted.bind(this)}
+								removeAll={this.removeAll.bind(this)}
 								removeTab={this.removeTab.bind(this)}
 								renameTab={this.renameTab.bind(this)}
 								sortTab={this.sortTab.bind(this)}
