@@ -3,8 +3,6 @@ import TieredAchieveProgress from './TieredAchieveProgress'
 import AchieveProgress from './AchieveProgress'
 import AchievementTooltip from './AchievementTooltip'
 
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
@@ -73,55 +71,56 @@ function Achievement(props) {
 class AchievementView extends React.Component {
 	render() {
 		return (
-			<div>
+			<div class="AchievementView">
 				{
 				this.props.achievements
 					.map(ach => (
-				<Row key={"ap-"+ach.id} className={(this.props.current[ach.id]?.done) ? "alert-success" : ""}
-					style={{marginRight: "0px"}}> {/* This style is a hack to fix the button causing an overflow */}
-					<Col sm="auto">
+				<div className={(this.props.current[ach.id]?.done) ? "alert-success av-row" : "av-row"}
+					key={"ap-"+ach.id}>
+					<div className="av-name av-row-item">
 						<OverlayTrigger
-							placement="right"
-							delay={{ show: 150, hide: 250 }}
-							overlay={
-								<AchievementTooltip achievement={ach}/>
-							}
-						>
-							<div className="achievement-name">
-								{(ach.flags.indexOf("Repeatable") >= 0) ? 
-									<img
-										src="https://wiki.guildwars2.com/images/0/01/Black_Lion_Trading_Company_currency_exchange_icon.png"
-										width={24} height={24}
-										alt="Repeatable Achievement"/>
-								: <div style={{width: 24, height: "100%"}}/>}
-								{ach.name}
-							</div>
+								placement="right"
+								delay={{ show: 150, hide: 250 }}
+								overlay={
+									<AchievementTooltip achievement={ach}/>
+								}>
+							<>
+								<div className="av-repeatable-icon">
+									{(ach.flags.indexOf("Repeatable") >= 0) ?
+										<img
+											src="https://wiki.guildwars2.com/images/0/01/Black_Lion_Trading_Company_currency_exchange_icon.png"
+											width={24} height={24}
+											alt="Repeatable Achievement"/>
+									: ""}
+								</div>
+								<div>{ach.name}</div>
+							</>
 						</OverlayTrigger>
-					</Col>
-					<Col sm="auto">
-						<div className="achievement-progress">
-						{"" + ((this.props.current[ach.id]) ? this.props.current[ach.id].current : "0") + " / " + ach.tiers.slice(-1)[0].count}
+					</div>
+					<div className="av-progress-text av-row-item">
+						<div className="av-progress-text-cur">
+							{(this.props.current[ach.id]) ? this.props.current[ach.id].current : "0"}
 						</div>
-					</Col>
-					<Col style={{
-							display: "flex",
-							flexDirection: "column",
-							justifyContent: "center"
-					}}>
-					{/* TODO: Switch between large/compact form based on state */}
-					{/* TODO: make this better, probably prone to breaking */}
+						<div>/</div>
+						<div className="av-progress-text-max">
+							{ach.tiers.slice(-1)[0].count}
+						</div>
+					</div>
+					<div className="av-progress-bar av-row-item">
+						{/* TODO: Switch between large/compact form based on state */}
+						{/* TODO: make this better, probably prone to breaking */}
 						<Achievement
 							key={"ap-col-"+ach.id}
 							data={ach}
 							current={this.props.current[ach.id]} />
-					</Col>
-					<Col sm="auto" className="achievement-close-btn">
+					</div>
+					<div className="achievement-close-btn av-row-item">
 						<Button className="AchievementClose" style={{padding: ".75rem .75rem"}}
 							onClick={() => this.props.deselectAchievement(ach.id)}>
 							<span>×</span>
 						</Button>
-					</Col>
-				</Row>
+					</div>
+				</div>
 				))
 				}
 			</div>

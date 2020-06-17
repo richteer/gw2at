@@ -1,20 +1,3 @@
-.achievement-name {
-  width: 200px;
-  height: 48px;
-  align-items: center;
-  justify-content: left;
-  display: flex;
-  line-height: 1.2;
-}
-
-.achievement-progress {
-  width: 60px;
-  height: 100%;
-  align-items: center;
-  justify-content: left;
-  display: flex;
-}
-
 .AchievementClose {
   font-size: 1.5rem !important;
   font-weight: 700 !important;
@@ -38,8 +21,7 @@
 }
 
 .achievement-close-btn {
-  padding-right: 5px !important;
-  padding-left: 0px!important;
+  flex-grow: 0;
 }
 
 .AchievementViewTabs {
@@ -56,4 +38,66 @@ a.nav-item.nav-link.active {
 
 .nav-danger-item:hover {
   background-color: #ffc5c1 !important;
+}
+
+.AchievementView {
+  display: flex;
+  flex-direction: column;
+}
+
+.av-row {
+  display: flex;
+  flex-direction: row;
+  height: 48px;
+}
+
+.av-row-item {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.av-repeatable-icon {
+  display: flex;
+  width: 24px;
+  height: 100%;
+  align-items: center;
+}
+
+.av-name {
+  flex-grow: 0;
+  width: 300px;
+  align-items: center;
+  justify-content: left;
+  display: flex;
+  line-height: 1.2;
+}
+
+.av-progress-text {
+  width: 100px;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-grow: 0;
+}
+
+.av-progress-text-cur {
+  display: flex;
+  justify-content: right;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.av-progress-text-max {
+  display: flex;
+  justify-content: left;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.av-progress-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
 }
