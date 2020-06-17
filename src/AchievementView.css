@@ -42,13 +42,15 @@ a.nav-item.nav-link.active {
 
 .AchievementView {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .av-row {
   display: flex;
   flex-direction: row;
   height: 48px;
+  width: 100%;
 }
 
 .av-row-item {
