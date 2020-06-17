@@ -77,26 +77,24 @@ class AchievementView extends React.Component {
 					.map(ach => (
 				<div className={(this.props.current[ach.id]?.done) ? "alert-success av-row" : "av-row"}
 					key={"ap-"+ach.id}>
-					<div className="av-name av-row-item">
-						<OverlayTrigger
+					<OverlayTrigger
 								placement="right"
 								delay={{ show: 150, hide: 250 }}
 								overlay={
 									<AchievementTooltip achievement={ach}/>
 								}>
-							<>
-								<div className="av-repeatable-icon">
-									{(ach.flags.indexOf("Repeatable") >= 0) ?
-										<img
-											src="https://wiki.guildwars2.com/images/0/01/Black_Lion_Trading_Company_currency_exchange_icon.png"
-											width={24} height={24}
-											alt="Repeatable Achievement"/>
-									: ""}
-								</div>
-								<div>{ach.name}</div>
-							</>
-						</OverlayTrigger>
-					</div>
+						<div className="av-name av-row-item">
+							<div className="av-repeatable-icon">
+								{(ach.flags.indexOf("Repeatable") >= 0) ?
+									<img
+										src="https://wiki.guildwars2.com/images/0/01/Black_Lion_Trading_Company_currency_exchange_icon.png"
+										width={24} height={24}
+										alt="Repeatable Achievement"/>
+								: ""}
+							</div>
+							<div>{ach.name}</div>
+						</div>
+					</OverlayTrigger>
 					<div className="av-progress-text av-row-item">
 						<div className="av-progress-text-cur">
 							{(this.props.current[ach.id]) ? this.props.current[ach.id].current : "0"}
