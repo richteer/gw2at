@@ -77,7 +77,8 @@ class AchievementView extends React.Component {
 				{
 				this.props.achievements
 					.map(ach => (
-				<Row key={"ap-"+ach.id} style={{padding:"3px"}} className={(this.props.current[ach.id]?.done) ? "alert-success" : ""}>
+				<Row key={"ap-"+ach.id} className={(this.props.current[ach.id]?.done) ? "alert-success" : ""}
+					style={{marginRight: "0px"}}> {/* This style is a hack to fix the button causing an overflow */}
 					<Col sm="auto">
 						<OverlayTrigger
 							placement="right"
@@ -92,7 +93,7 @@ class AchievementView extends React.Component {
 										src="https://wiki.guildwars2.com/images/0/01/Black_Lion_Trading_Company_currency_exchange_icon.png"
 										width={24} height={24}
 										alt="Repeatable Achievement"/>
-								: <div style={{width: 24}}/>}
+								: <div style={{width: 24, height: "100%"}}/>}
 								{ach.name}
 							</div>
 						</OverlayTrigger>
@@ -114,7 +115,7 @@ class AchievementView extends React.Component {
 							data={ach}
 							current={this.props.current[ach.id]} />
 					</Col>
-					<Col sm="auto">
+					<Col sm="auto" className="achievement-close-btn">
 						<Button className="AchievementClose" style={{padding: ".75rem .75rem"}}
 							onClick={() => this.props.deselectAchievement(ach.id)}>
 							<span>×</span>

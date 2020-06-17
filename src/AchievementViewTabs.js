@@ -4,7 +4,6 @@ import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-//import Row from 'react-bootstrap/Row'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Col from 'react-bootstrap/Col'
@@ -274,61 +273,62 @@ class AchievementViewTabs extends React.Component {
 
 	render() {
 		return (
-			<Tabs onSelect={(e) => {
-					/* This is a delicious hack...
-					 * Manually handle tab switching, intercept switching the options tab so it functions as a
-					 * button without having to do any weird layouting stuff.
-					 */
-					if (e === "show-tab-options") {
-						this.setState((state) => ({showTabNav: !state.showTabNav}), ()=>console.log(this.state));
-					}
-					else {
-						this.setState({activeTab: e.replace("key-", "")})
-					}
-				}}
-				activeKey={"key-" + this.state.activeTab}
-				defaultActiveKey={"key-" + Object.keys(this.state.tabs)[0]}>
-				<Tab
-					eventKey="show-tab-options"
-					title={
-							<img src="https://wiki.guildwars2.com/images/2/25/Game_menu_options_icon.png"
-								alt="Show Tab Options"
-								width={24} height={24}/>
-					}>
-				</Tab>
-				{
-					Object.entries(this.state.tabs).map(tab => (
-					<Tab eventKey={`key-${tab[0]}`} key={`tab-${tab[0]}`} title={tab[0]}>
-						{/* TODO: maybe clean these callbacks? it seems pretty...inelegant */}
-						<TabsOptionsNav
-							clearCompleted={this.clearCompleted.bind(this)}
-							removeTab={this.removeTab.bind(this)}
-							renameTab={this.renameTab.bind(this)}
-							sortTab={this.sortTab.bind(this)}
-							tab={tab[0]}
-							show={!this.state.showTabNav}
-							/>
-						<AchievementView
-							achievements={tab[1].map(a => achievement_data[a]).filter(a => a)}
-							current={this.props.achieves}
-							deselectAchievement={this.deselectAchievement.bind(this)}
-							/>
+			<div className="AchievementViewTabs">
+				<Tabs onSelect={(e) => {
+						/* This is a delicious hack...
+						* Manually handle tab switching, intercept switching the options tab so it functions as a
+						* button without having to do any weird layouting stuff.
+						*/
+						if (e === "show-tab-options") {
+							this.setState((state) => ({showTabNav: !state.showTabNav}), ()=>console.log(this.state));
+						}
+						else {
+							this.setState({activeTab: e.replace("key-", "")})
+						}
+					}}
+					activeKey={"key-" + this.state.activeTab}
+					defaultActiveKey={"key-" + Object.keys(this.state.tabs)[0]}>
+					<Tab
+						eventKey="show-tab-options"
+						title={
+								<img src="https://wiki.guildwars2.com/images/2/25/Game_menu_options_icon.png"
+									alt="Show Tab Options"
+									width={24} height={24}/>
+						}>
 					</Tab>
-				))}
-				<Tab eventKey="key-new-tab" title={<div className="NewTab">+</div>}>
-					<Form onSubmit={this.addTab.bind(this)}>
-						<Form.Row>
-							<Col>
-									<Form.Control type="text" placeholder="New Tab" ref={this.addTabRef}/>
-							</Col>
-							<Col sm="auto" style={{display: "flex", alignItems:"left", justifyContent:"center"}}>
-								<Button variant="primary" type="submit">Add</Button>
-							</Col>
-						</Form.Row>
-					</Form>
-				</Tab>
-			</Tabs>
-
+					{
+						Object.entries(this.state.tabs).map(tab => (
+						<Tab eventKey={`key-${tab[0]}`} key={`tab-${tab[0]}`} title={tab[0]}>
+							{/* TODO: maybe clean these callbacks? it seems pretty...inelegant */}
+							<TabsOptionsNav
+								clearCompleted={this.clearCompleted.bind(this)}
+								removeTab={this.removeTab.bind(this)}
+								renameTab={this.renameTab.bind(this)}
+								sortTab={this.sortTab.bind(this)}
+								tab={tab[0]}
+								show={!this.state.showTabNav}
+								/>
+							<AchievementView
+								achievements={tab[1].map(a => achievement_data[a]).filter(a => a)}
+								current={this.props.achieves}
+								deselectAchievement={this.deselectAchievement.bind(this)}
+								/>
+						</Tab>
+					))}
+					<Tab eventKey="key-new-tab" title={<div className="NewTab">+</div>}>
+						<Form onSubmit={this.addTab.bind(this)}>
+							<Form.Row>
+								<Col>
+										<Form.Control type="text" placeholder="New Tab" ref={this.addTabRef}/>
+								</Col>
+								<Col sm="auto" style={{display: "flex", alignItems:"left", justifyContent:"center"}}>
+									<Button variant="primary" type="submit">Add</Button>
+								</Col>
+							</Form.Row>
+						</Form>
+					</Tab>
+				</Tabs>
+			</div>
 		)
 	}
 }
