@@ -5,9 +5,6 @@ import AchievementViewTabs from './AchievementViewTabs'
 import AchievementSelector from './AchievementSelector'
 
 import Alert from 'react-bootstrap/Alert'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
@@ -177,63 +174,60 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Navbar bg="dark" variant="dark">
-          <Navbar.Brand>GW2AT</Navbar.Brand>
-          <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-              <InputGroup>
-                <FormControl
-                  placeholder="API Key with achievements permission"
-                  ref={this.apiKeyRef}
-                  style={{width: "680px"}}
-                />
-                <InputGroup.Append>
-                  <Button variant="primary" onClick={this.updateApiKey.bind(this)}>Update</Button>
-                </InputGroup.Append>
-              </InputGroup>
-            </Navbar.Text>
+        <div style={{flexShrink: 0}}>
+          <Navbar bg="dark" variant="dark">
+            <Navbar.Brand>GW2AT</Navbar.Brand>
+            <Navbar.Collapse className="justify-content-end">
+              <Navbar.Text>
+                <InputGroup>
+                  <FormControl
+                    placeholder="API Key with achievements permission"
+                    ref={this.apiKeyRef}
+                    style={{width: "680px"}}
+                  />
+                  <InputGroup.Append>
+                    <Button variant="primary" onClick={this.updateApiKey.bind(this)}>Update</Button>
+                  </InputGroup.Append>
+                </InputGroup>
+              </Navbar.Text>
 
-            <NavDropdown title="Auto-update" id="auto-update-api"
-                onSelect={(k) => this.setAutoUpdate(k)}>
-              <NavDropdown.Item eventKey={10}>10 minutes</NavDropdown.Item>
-              <NavDropdown.Item eventKey={5}>5 minutes</NavDropdown.Item>
-              <NavDropdown.Item eventKey={1}>1 minute</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item eventKey={0}>Cancel</NavDropdown.Item>
-            </NavDropdown>
+              <NavDropdown title="Auto-update" id="auto-update-api"
+                  onSelect={(k) => this.setAutoUpdate(k)}>
+                <NavDropdown.Item eventKey={10}>10 minutes</NavDropdown.Item>
+                <NavDropdown.Item eventKey={5}>5 minutes</NavDropdown.Item>
+                <NavDropdown.Item eventKey={1}>1 minute</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item eventKey={0}>Cancel</NavDropdown.Item>
+              </NavDropdown>
 
-            <Navbar.Text hidden={!this.state.autoUpdateEnabled}>
-              <span>
-                Next update: {this.state.nextUpdateCountDown}s
-              </span>
-            </Navbar.Text>
+              <Navbar.Text hidden={!this.state.autoUpdateEnabled}>
+                <span>
+                  Next update: {this.state.nextUpdateCountDown}s
+                </span>
+              </Navbar.Text>
 
-          </Navbar.Collapse>
-        </Navbar>
-        <Alert
-          variant="danger"
-          show={!!this.state.error}
-          onClose={this.clearError.bind(this)}
-          dismissible
-          >
-          {this.state.error}
-        </Alert>
+            </Navbar.Collapse>
+          </Navbar>
+          <Alert
+            variant="danger"
+            show={!!this.state.error}
+            onClose={this.clearError.bind(this)}
+            dismissible
+            >
+            {this.state.error}
+          </Alert>
+        </div>
 
-        <Container fluid>
-          <Row>
-            <Col sm="auto" style={{width: "400px"}}>
-              <AchievementSelector
-                selectAchievement={this.state.achieveViewRef}
-                playerAchieves={this.state.achieves}
-                />
-            </Col>
-            <Col>
-              <AchievementViewTabs
-                ref={this.state.achieveViewRef}
-                achieves={this.state.achieves}/>
-            </Col>
-          </Row>
-        </Container>
+          <div className="app-window">
+            <AchievementSelector
+              selectAchievement={this.state.achieveViewRef}
+              playerAchieves={this.state.achieves}
+              />
+            <AchievementViewTabs
+              ref={this.state.achieveViewRef}
+              achieves={this.state.achieves}/>
+          </div>
+
       </div>
     );
   }
