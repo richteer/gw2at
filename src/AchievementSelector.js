@@ -4,11 +4,10 @@ import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Dropdown from 'react-bootstrap/Dropdown'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
 import AchievementTooltip from './AchievementTooltip'
+import './AchievementSelector.css'
 
 import all_groups from './achievement_groups.json'
 import all_categories from './achievement_categories.json'
@@ -125,106 +124,89 @@ class AchievementSelector extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<Row>
-					<Col>
-						<Dropdown alignRight>
-							<Dropdown.Toggle block size="sm">
-								{(this.state.group) ? this.state.group.name : "Select Group"}
-							</Dropdown.Toggle>
-							<Dropdown.Menu>
-							{
-								all_groups.sort((a,b) => a.order > b.order).map(group => (
-									<Dropdown.Item
-										key={`group-dd-${group.id}`}
-										active={this.state.group?.id === group.id}
-										eventKey={group.id}
-										onSelect={this.setGroup.bind(this)}
-									>{group.name}</Dropdown.Item>
-								))
-							}
-							</Dropdown.Menu>
-						</Dropdown>
-					</Col>
-				</Row>
-				<Row>
-					<Col>
-						<Dropdown alignRight>
-							<Dropdown.Toggle
-								block
-								size="sm"
-								disabled={!this.state.group}>
-								{(this.state.category) ? this.state.category.name : "Select Category"}
-							</Dropdown.Toggle>
-							<Dropdown.Menu>
-							{
-								this.state.group?.categories
-									.map(c => (all_categories[c]))
-									.sort((a,b) => (a.order > b.order))
-									.map(category => (
-									<Dropdown.Item
-										key={`category-dd-${category.id}`}
-										eventKey={category.id}
-										active={this.state.category?.id === category.id}
-										onSelect={(e) => (this.setState({category: all_categories[e]}))}
+			<div className="AchievementSelector">
+				<div style={{flexShrink: 0}}>
+					<Dropdown alignRight>
+						<Dropdown.Toggle block size="sm">
+							{(this.state.group) ? this.state.group.name : "Select Group"}
+						</Dropdown.Toggle>
+						<Dropdown.Menu>
+						{
+							all_groups.sort((a,b) => a.order > b.order).map(group => (
+								<Dropdown.Item
+									key={`group-dd-${group.id}`}
+									active={this.state.group?.id === group.id}
+									eventKey={group.id}
+									onSelect={this.setGroup.bind(this)}
+								>{group.name}</Dropdown.Item>
+							))
+						}
+						</Dropdown.Menu>
+					</Dropdown>
+					<Dropdown alignRight>
+						<Dropdown.Toggle
+							block
+							size="sm"
+							disabled={!this.state.group}>
+							{(this.state.category) ? this.state.category.name : "Select Category"}
+						</Dropdown.Toggle>
+						<Dropdown.Menu>
+						{
+							this.state.group?.categories
+								.map(c => (all_categories[c]))
+								.sort((a,b) => (a.order > b.order))
+								.map(category => (
+								<Dropdown.Item
+									key={`category-dd-${category.id}`}
+									eventKey={category.id}
+									active={this.state.category?.id === category.id}
+									onSelect={(e) => (this.setState({category: all_categories[e]}))}
+									>
+									<img src={category.icon} width={24} height={24} alt={category.name}/>
+									{category.name}
+								</Dropdown.Item>
+							))
+						}
+						</Dropdown.Menu>
+					</Dropdown>
+				</div>
+				<ListGroup className="achievement-selector-list" hidden={!this.state.category}>
+					{
+						this.state.category?.achievements
+							.map(a => (all_achievements[a]))
+							.filter(a => a)
+							.sort(sortByName(this.props.playerAchieves))
+							.sort(sortByDone(this.props.playerAchieves))
+							.map((ach) => (
+								<OverlayTrigger
+										overlay={<AchievementTooltip achievement={ach}/>}
+										placement="right"
+										transition={false}
 										>
-										<img src={category.icon} width={24} height={24} alt={category.name}/>
-										{category.name}
-									</Dropdown.Item>
-								))
-							}
-							</Dropdown.Menu>
-						</Dropdown>
-					</Col>
-				</Row>
-				<Row>
-					<Col style={{overflowY: "auto", maxHeight: "85vh"}}>
-					
-						<ListGroup hidden={!this.state.category}>
-							{
-								this.state.category?.achievements
-									.map(a => (all_achievements[a]))
-									.filter(a => a)
-									.sort(sortByName(this.props.playerAchieves))
-									.sort(sortByDone(this.props.playerAchieves))
-									.map((ach) => (
-										<OverlayTrigger
-												overlay={<AchievementTooltip achievement={ach}/>}
-												placement="right"
-												transition={false}
-												>
-											<ListGroup.Item
-												action
-												style={{
-													display: "flex",
-													alignItems: "center",
-													justifyContent: "space-between",
-													fontSize: "10pt",
-													backgroundColor: "rgba(255,255,255,0.7)"
-												}}
-												key={"achieve-select-" + ach.id}
-												variant={(!this.props.playerAchieves[ach.id]) ? "light"
-													: ((this.props.playerAchieves[ach.id].done) ? "success" : "")}
-												onClick={() => {console.log(this.props.selectAchievement); this.props.selectAchievement.current.selectAchievement(ach.id)}}>
-												<div>{ach.name}
-												{(ach.flags.indexOf("Repeatable") >= 0) ?
-													<img
-														src="https://wiki.guildwars2.com/images/0/01/Black_Lion_Trading_Company_currency_exchange_icon.png"
-														width={24} height={24}
-														alt="Repeatable Achievement"/>
-												: ""}
-												</div>
-												{
-													(this.props.playerAchieves[ach.id]?.done) ? "" :
-														this.getMasteryPointIcon(ach.id)
-												}
-											</ListGroup.Item>
-										</OverlayTrigger>
-									))
-							}
-						</ListGroup>
-					</Col>
-				</Row>
+									<ListGroup.Item
+										action
+										className="achievement-list-item"
+										key={"achieve-select-" + ach.id}
+										variant={(!this.props.playerAchieves[ach.id]) ? "light"
+											: ((this.props.playerAchieves[ach.id].done) ? "success" : "")}
+										onClick={() => {console.log(this.props.selectAchievement); this.props.selectAchievement.current.selectAchievement(ach.id)}}>
+										<div>{ach.name}
+										{(ach.flags.indexOf("Repeatable") >= 0) ?
+											<img
+												src="https://wiki.guildwars2.com/images/0/01/Black_Lion_Trading_Company_currency_exchange_icon.png"
+												width={24} height={24}
+												alt="Repeatable Achievement"/>
+										: ""}
+										</div>
+										{
+											(this.props.playerAchieves[ach.id]?.done) ? "" :
+												this.getMasteryPointIcon(ach.id)
+										}
+									</ListGroup.Item>
+								</OverlayTrigger>
+							))
+					}
+				</ListGroup>
 			</div>
 		)
 	}
