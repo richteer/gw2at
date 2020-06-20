@@ -2,9 +2,11 @@ import React from 'react'
 import TieredAchieveProgress from './TieredAchieveProgress'
 import AchieveProgress from './AchieveProgress'
 import AchievementTooltip from './AchievementTooltip'
+import AchievementDetail from './AchievementDetail'
 
 import Button from 'react-bootstrap/Button'
-
+import Accordion from 'react-bootstrap/Accordion'
+import Card from 'react-bootstrap/Card'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
 // TODO: Remove this
@@ -12,7 +14,7 @@ import tiered_rewards from './tiered_rewards.json'
 import item_data from './item_data.json'
 
 import "./AchievementView.css"
-
+import { useAccordionToggle } from 'react-bootstrap/AccordionToggle';
 
 // TODO: probably convert to CSS, have it be a general style override
 const gradient_map = {
@@ -69,58 +71,90 @@ function Achievement(props) {
 // TODO: Split expanded and compact view components at some point
 // TODO: Split out the inline CSS to a separate CSS file
 class AchievementView extends React.Component {
+
+	CustomToggle({ children, eventKey }) {
+		const decoratedOnClick = useAccordionToggle(eventKey, () =>
+			({
+
+			})
+		);
+	  
+		return (
+		  <div
+		  onClick={decoratedOnClick}
+		  >
+			{children}
+		  </div>
+		);
+	  }
+
 	render() {
 		return (
 			<div class="AchievementView">
+				<Accordion style={{width: "100%"}}>
 				{
 				this.props.achievements
 					.map(ach => (
-				<div className={(this.props.current[ach.id]?.done) ? "alert-success av-row" : "av-row"}
-					key={"ap-"+ach.id}>
-					<OverlayTrigger
-								placement="right"
-								delay={{ show: 150, hide: 250 }}
-								overlay={
-									<AchievementTooltip achievement={ach}/>
-								}>
-						<div className="av-name av-row-item">
-							<div className="av-repeatable-icon">
-								{(ach.flags.indexOf("Repeatable") >= 0) ?
-									<img
-										src="https://wiki.guildwars2.com/images/0/01/Black_Lion_Trading_Company_currency_exchange_icon.png"
-										width={24} height={24}
-										alt="Repeatable Achievement"/>
-								: ""}
+					<div>
+						<this.CustomToggle eventKey={ach.id}>
+						<div className={(this.props.current[ach.id]?.done) ? "alert-success av-row" : "av-row"}
+							key={"ap-"+ach.id}>
+							<div className="achievement-close-btn av-row-item">
+								<Button className="AchievementClose" style={{padding: ".75rem .75rem"}}
+									onClick={() => this.props.deselectAchievement(ach.id)}>
+								</Button>
 							</div>
-							<div>{ach.name}</div>
+							<OverlayTrigger
+										placement="right"
+										delay={{ show: 150, hide: 250 }}
+										overlay={
+											<AchievementTooltip achievement={ach}/>
+										}>
+								<div className="av-name av-row-item">
+									<div className="av-repeatable-icon">
+										{(ach.flags.indexOf("Repeatable") >= 0) ?
+											<img
+												src="https://wiki.guildwars2.com/images/0/01/Black_Lion_Trading_Company_currency_exchange_icon.png"
+												width={24} height={24}
+												alt="Repeatable Achievement"/>
+										: ""}
+									</div>
+									<div>{ach.name}</div>
+								</div>
+							</OverlayTrigger>
+							<div className="av-progress-text av-row-item">
+								<div className="av-progress-text-cur">
+									{(this.props.current[ach.id]) ? this.props.current[ach.id].current : "0"}
+								</div>
+								<div>/</div>
+								<div className="av-progress-text-max">
+									{ach.tiers.slice(-1)[0].count}
+								</div>
+							</div>
+							<div className="av-progress-bar av-row-item">
+								{/* TODO: Switch between large/compact form based on state */}
+								{/* TODO: make this better, probably prone to breaking */}
+								<Achievement
+									key={"ap-col-"+ach.id}
+									data={ach}
+									current={this.props.current[ach.id]} />
+							</div>
+							<div className="achievement-close-btn av-row-item">
+								<Button className="AchievementClose" style={{padding: ".75rem .75rem"}}
+									onClick={() => this.props.deselectAchievement(ach.id)}>
+									<span>×</span>
+								</Button>
+							</div>
 						</div>
-					</OverlayTrigger>
-					<div className="av-progress-text av-row-item">
-						<div className="av-progress-text-cur">
-							{(this.props.current[ach.id]) ? this.props.current[ach.id].current : "0"}
-						</div>
-						<div>/</div>
-						<div className="av-progress-text-max">
-							{ach.tiers.slice(-1)[0].count}
-						</div>
+						</this.CustomToggle>
+						<Accordion.Collapse eventKey={ach.id}>
+							<AchievementDetail achievement={ach} current={this.props.current[ach.id]}/>
+						</Accordion.Collapse>
+						
 					</div>
-					<div className="av-progress-bar av-row-item">
-						{/* TODO: Switch between large/compact form based on state */}
-						{/* TODO: make this better, probably prone to breaking */}
-						<Achievement
-							key={"ap-col-"+ach.id}
-							data={ach}
-							current={this.props.current[ach.id]} />
-					</div>
-					<div className="achievement-close-btn av-row-item">
-						<Button className="AchievementClose" style={{padding: ".75rem .75rem"}}
-							onClick={() => this.props.deselectAchievement(ach.id)}>
-							<span>×</span>
-						</Button>
-					</div>
-				</div>
 				))
 				}
+				</Accordion>
 			</div>
 		)
 	}
