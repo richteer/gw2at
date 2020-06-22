@@ -1,0 +1,29 @@
+.ach-det{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
+}
+
+.ach-det-req{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.ach-det-desc{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.ach-det-lockedtext{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.ach-det-bits{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+}

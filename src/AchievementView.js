@@ -99,16 +99,11 @@ class AchievementView extends React.Component {
 						<this.CustomToggle eventKey={ach.id}>
 						<div className={(this.props.current[ach.id]?.done) ? "alert-success av-row" : "av-row"}
 							key={"ap-"+ach.id}>
-							<div className="achievement-close-btn av-row-item">
-								<Button className="AchievementClose" style={{padding: ".75rem .75rem"}}
-									onClick={() => this.props.deselectAchievement(ach.id)}>
-								</Button>
-							</div>
 							<OverlayTrigger
 										placement="right"
 										delay={{ show: 150, hide: 250 }}
 										overlay={
-											<AchievementTooltip achievement={ach}/>
+											<AchievementTooltip achievement={ach} unlocked={this.props.current[ach.id]?.unlocked}/>
 										}>
 								<div className="av-name av-row-item">
 									<div className="av-repeatable-icon">
@@ -140,7 +135,7 @@ class AchievementView extends React.Component {
 									current={this.props.current[ach.id]} />
 							</div>
 							<div className="achievement-close-btn av-row-item">
-								<Button className="AchievementClose" style={{padding: ".75rem .75rem"}}
+								<Button className="AchievementClose"
 									onClick={() => this.props.deselectAchievement(ach.id)}>
 									<span>×</span>
 								</Button>

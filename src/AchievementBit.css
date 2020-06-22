@@ -1,0 +1,12 @@
+.ach-bit-item{
+    float: left;
+    padding: 2px;
+}
+
+.ach-bit-text{
+
+}
+
+.ach-bit-text-done{
+    color: rgb(40, 182, 47);
+}

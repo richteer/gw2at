@@ -44,6 +44,7 @@ const rarity_map = {
 
 class IconWithTooltip extends React.Component {
 	render() {
+		
 		return (
 			<OverlayTrigger
 				placement="bottom"
@@ -60,12 +61,17 @@ class IconWithTooltip extends React.Component {
 							{this.props.item.name}
 						</Popover.Title>
 						<Popover.Content>
+							{
+							this.props.item.description?
 							<div dangerouslySetInnerHTML={{ __html: this.props.item.description
 									.replace(/\n/,"<br/>")
 									.replace(/<c=@flavor>/,"<br/><br/><i>")
 									.replace(/<\/c>/, "</i>")
 								}}>
 							</div>
+							:
+							<div></div>
+							}
 						</Popover.Content>
 					</Popover>
 				}

@@ -4,7 +4,7 @@ import Popover from 'react-bootstrap/Popover'
 class AchievementTooltip extends React.Component {
   generateBody(ach) {
     // TODO: Use CSS classes for these probably
-    if(ach.locked_text === ""){
+    if(ach.locked_text === "" || this.props.unlocked){
       return (
         <div>
           {ach.requirement}
@@ -19,7 +19,7 @@ class AchievementTooltip extends React.Component {
         <br/><br/>
         <i dangerouslySetInnerHTML={{__html: ach.description}}></i>
         <br/><br/>
-        <i style={{color:"#F00"}}>{ach.locked_text}</i>
+        <i style={{color:"#F00"}}>Unlock: {ach.locked_text}</i>
       </div>
     )
   }
