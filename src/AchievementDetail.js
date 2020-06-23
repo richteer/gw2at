@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ItemWithTooltip from './ItemWithTooltip'
+//import ItemWithTooltip from './ItemWithTooltip'
 import AchievementBit from './AchievementBit'
 
 import './AchievementDetail.css'

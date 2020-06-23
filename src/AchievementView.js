@@ -6,7 +6,7 @@ import AchievementDetail from './AchievementDetail'
 
 import Button from 'react-bootstrap/Button'
 import Accordion from 'react-bootstrap/Accordion'
-import Card from 'react-bootstrap/Card'
+//import Card from 'react-bootstrap/Card'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
 // TODO: Remove this
