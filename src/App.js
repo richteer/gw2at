@@ -13,29 +13,6 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const api_root = "https://api.guildwars2.com"
-/*
-// TODO: CLEAN UP THESE TERRIBLE CONVERSION TABLES HOLY CRAP
-const achieve_map = [
-  { "ash":   [5327, 5338]},
-  { "blood": [5312, 5278]},
-  { "flame": [5319, 5334]},
-  { "iron":  [5298, 5286]},
-]
-
-const achieve_ids_old = [
-  5327, 5338,
-  5312, 5278,
-  5319, 5334,
-  5298, 5286,
-]
-
-const achieve_ids = {
-  5327: "ash",   5338: "ash",
-  5312: "blood", 5278: "blood",
-  5319: "flame", 5334: "flame",
-  5298: "iron",  5286: "iron",
-}
-*/
 
 class App extends React.Component {
   constructor(props) {
