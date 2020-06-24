@@ -1,7 +1,5 @@
 import React from 'react'
 
-import Accordion from 'react-bootstrap/Accordion'
-import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Dropdown from 'react-bootstrap/Dropdown'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
@@ -19,64 +17,6 @@ const mastery_points = {
 	Desert: "https://wiki.guildwars2.com/images/thumb/4/41/Mastery_point_%28Path_of_Fire%29.png/60px-Mastery_point_%28Path_of_Fire%29.png",
 	Unknown: "https://wiki.guildwars2.com/images/thumb/2/25/Mastery_point_%28Icebrood_Saga%29.png/60px-Mastery_point_%28Icebrood_Saga%29.png"
 }
-
-
-class OldAchievementSelector extends React.Component {
-	render() {
-		return (
-			<Accordion>
-				{ // Outer Accordion for groups
-					all_groups.sort((a,b) => a.order > b.order).map(group => (
-						<Card key={"group-select-" + group.id}>
-							<Accordion.Toggle as={Card.Header} eventKey={group.name}>
-								{group.name}
-							</Accordion.Toggle>
-							<Accordion.Collapse eventKey={group.name}>
-      					<Card.Body>
-									{ // Inner Accordion for categories
-										<Accordion>
-											{
-												group.categories
-													.map(c => (all_categories[c]))
-													.sort((a,b) => (a.order > b.order))
-													.map(category => (
-													<Card key={"category-select-" + category.id}>
-														<Accordion.Toggle as={Card.Header} eventKey={category.name}>
-															{category.name}
-														</Accordion.Toggle>
-														<Accordion.Collapse eventKey={category.name}>
-															<Card.Body>
-																<ListGroup variant="flush">
-																{ // Last Inner Accordion for quests. Holy crap the nesting...
-																	category.achievements
-																		.map(a => (all_achievements[a]))
-																		.filter(a => a)
-																		.map((ach) => (
-																			<ListGroup.Item
-																				key={"achieve-select-" + ach.id}
-																				onClick={() => this.props.selectAchievement(ach.id)}>
-																				{ach.name}
-																			</ListGroup.Item>
-																		))
-																}
-																</ListGroup>
-															</Card.Body>
-														</Accordion.Collapse>
-													</Card>
-												))
-											}
-										</Accordion>
-									}
-								</Card.Body>
-    					</Accordion.Collapse>
-						</Card>
-					))
-				}
-			</Accordion>
-		)
-	}
-}
-
 
 class AchievementSelector extends React.Component {
 	constructor(props) {
@@ -249,4 +189,3 @@ function sortByDone(playerAchieves) {
 
 
 export default AchievementSelector
-export { OldAchievementSelector }
