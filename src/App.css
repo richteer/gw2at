@@ -20,3 +20,12 @@
   margin-right: 12px;
   margin-top:12px;
 }
+
+.dark-toggle {
+  padding: 5px;
+  filter: grayscale(100%);
+}
+
+.dark-toggle:hover {
+  cursor: pointer;
+}

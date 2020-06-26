@@ -24,6 +24,7 @@ class App extends React.Component {
         achieves: {},
         lastUpdate: 0,
         apikey: null,
+        darkTheme: false,
         achieveViewRef: React.createRef() // TODO: Does this really need to be in state?
       }
 
@@ -150,10 +151,13 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div className={`App ${(this.state.darkTheme) ? "dark-invert" : "\u1F319"}`}>
         <div style={{flexShrink: 0}}>
-          <Navbar bg="dark" variant="dark">
+          <Navbar bg="dark" variant="dark" className={`${(this.state.darkTheme) ? "dark-invert" : ""}`}>
             <Navbar.Brand>GW2AT</Navbar.Brand>
+            <div className="dark-toggle" onClick={() => this.setState((s) => ({darkTheme: !s.darkTheme}))}>
+              {(this.state.darkTheme) ?  "\u{1F319}" : "\u{1f506}"}
+            </div>
             <Navbar.Collapse className="justify-content-end">
               <Navbar.Text>
                 <InputGroup>
@@ -190,6 +194,7 @@ class App extends React.Component {
             show={!!this.state.error}
             onClose={this.clearError.bind(this)}
             dismissible
+            className={`${(this.state.darkTheme) ? "dark-invert" : ""}`}
             >
             {this.state.error}
           </Alert>
