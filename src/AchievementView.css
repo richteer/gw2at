@@ -52,7 +52,7 @@ a.nav-item.nav-link.active {
   flex-direction: row;
   height: 48px;
   width: 100%;
-
+  align-items: center;
 }
 
 .av-row:hover{
