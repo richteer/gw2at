@@ -76,6 +76,96 @@ class GW2API {
     return itemInfo
   }
 
+  // Holy crap I hate async. We should really break these functions apart somehow and make them much nicer
+  static async getAchievementGroups() {
+    var url = api_root + "/v2/achievements/groups?ids=all"
+    var groups
+
+    await fetch(url)
+    .then(result => {
+      if (result.ok) {
+        console.log(`Fetched API data successfully - ${result.statusText}`)
+        
+        groups = result.json()
+      }
+      else {
+        console.log(result)
+      }        
+    })
+    .catch(error => {
+        console.log("ugh debug this later")
+        console.log(error)
+      }
+    )
+
+    if (groups === undefined) {
+      console.log("groups was undefined")
+      return []
+    }
+
+    return groups
+  }
+
+  static async getAchievementCategories(ids) {
+    if (!ids) ids="all"
+    else ids = ids.join(",")
+
+    var url = api_root + "/v2/achievements/categories?ids=" + ids
+    var categories
+
+    await fetch(url)
+    .then(result => {
+      if (result.ok) {
+        console.log(`Fetched API data successfully - ${result.statusText}`)
+        
+        categories = result.json()
+      }
+      else {
+        console.log(result)
+      }        
+    })
+    .catch(error => {
+        console.log("ugh debug this later")
+        console.log(error)
+      }
+    )
+
+    if (categories === undefined) {
+      return []
+    }
+
+    return await categories
+  }
+
+  static async getAchievements(ids) {
+    ids = ids.join(",")
+
+    var url = api_root + "/v2/achievements?ids=" + ids
+    var achievements
+
+    await fetch(url)
+    .then(result => {
+      if (result.ok) {
+        console.log(`Fetched API data successfully - ${result.statusText}`)
+        // TODO: actually handle 206 correctly in here probably maybe
+        achievements = result.json()
+      }
+      else {
+        console.log(result)
+      }        
+    })
+    .catch(error => {
+        console.log("ugh debug this later")
+        console.log(error)
+      }
+    )
+
+    if (achievements === undefined) {
+      return []
+    }
+
+    return await achievements
+  }
 }
 
 export default GW2API
