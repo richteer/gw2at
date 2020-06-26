@@ -155,9 +155,6 @@ class App extends React.Component {
         <div style={{flexShrink: 0}}>
           <Navbar bg="dark" variant="dark" className={`${(this.state.darkTheme) ? "dark-invert" : ""}`}>
             <Navbar.Brand>GW2AT</Navbar.Brand>
-            <div className="dark-toggle" onClick={() => this.setState((s) => ({darkTheme: !s.darkTheme}))}>
-              {(this.state.darkTheme) ?  "\u{1F319}" : "\u{1f506}"}
-            </div>
             <Navbar.Collapse className="justify-content-end">
               <Navbar.Text>
                 <InputGroup>
@@ -188,6 +185,9 @@ class App extends React.Component {
               </Navbar.Text>
 
             </Navbar.Collapse>
+            <div className="dark-toggle" onClick={() => this.setState((s) => ({darkTheme: !s.darkTheme}))}>
+              {(this.state.darkTheme) ?  "\u{1F319}" : "\u{1f506}"}
+            </div>
           </Navbar>
           <Alert
             variant="danger"
