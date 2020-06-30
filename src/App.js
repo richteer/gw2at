@@ -36,12 +36,15 @@ class App extends React.Component {
   componentDidMount() {
     // Retrieve the API key from the cookie and set it here
     var apikey = localStorage.getItem("apikey")
+    var darkTheme = localStorage.getItem("darktheme")
     if (apikey) {
       this.apiKeyRef.current.value = apikey
       this.updateApiKey(apikey)
     }
-
-
+    
+    if(darkTheme === "true"){
+      this.state.darkTheme = true
+    }
   }
 
   updateAchievementData(data) {
@@ -149,6 +152,12 @@ class App extends React.Component {
     this.setState({"error" : ""})
   }
 
+  toogleDarkTheme(){
+    this.setState({darkTheme: !this.state.darkTheme}, () => {
+      localStorage.setItem("darktheme", this.state.darkTheme)
+    })
+  }
+
   render() {
     return (
       <div className={`App ${(this.state.darkTheme) ? "dark-invert" : "\u1F319"}`}>
@@ -185,7 +194,7 @@ class App extends React.Component {
               </Navbar.Text>
 
             </Navbar.Collapse>
-            <div className="dark-toggle" onClick={() => this.setState((s) => ({darkTheme: !s.darkTheme}))}>
+            <div className="dark-toggle" onClick={this.toogleDarkTheme.bind(this)}>
               {(this.state.darkTheme) ?  "\u{1F319}" : "\u{1f506}"}
             </div>
           </Navbar>
