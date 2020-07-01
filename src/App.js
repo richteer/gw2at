@@ -43,7 +43,7 @@ class App extends React.Component {
     }
     
     if(darkTheme === "true"){
-      this.state.darkTheme = true
+      this.setState({darkTheme: true})
     }
   }
 
