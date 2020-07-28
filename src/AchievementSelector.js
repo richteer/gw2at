@@ -12,6 +12,7 @@ const mastery_points = {
 	Tyria: "https://wiki.guildwars2.com/images/thumb/b/b7/Mastery_point_%28Central_Tyria%29.png/60px-Mastery_point_%28Central_Tyria%29.png",
 	Maguuma: "https://wiki.guildwars2.com/images/thumb/8/84/Mastery_point_%28Heart_of_Thorns%29.png/60px-Mastery_point_%28Heart_of_Thorns%29.png",
 	Desert: "https://wiki.guildwars2.com/images/thumb/4/41/Mastery_point_%28Path_of_Fire%29.png/60px-Mastery_point_%28Path_of_Fire%29.png",
+	Tundra: "https://wiki.guildwars2.com/images/thumb/2/25/Mastery_point_%28Icebrood_Saga%29.png/60px-Mastery_point_%28Icebrood_Saga%29.png",
 	Unknown: "https://wiki.guildwars2.com/images/thumb/2/25/Mastery_point_%28Icebrood_Saga%29.png/60px-Mastery_point_%28Icebrood_Saga%29.png"
 }
 
