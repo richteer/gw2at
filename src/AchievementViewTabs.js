@@ -11,10 +11,9 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import AchievementView from './AchievementView'
 
-import './NewTab.css'
+import GW2API from './GW2API'
 
-// TODO: check if these imports actually increase memory usage
-import achievement_data from './achievement_data.json'
+import './NewTab.css'
 
 // Table of sort functions to use
 // Each should take in achievement progress and data, and return a function
@@ -155,7 +154,7 @@ class AchievementViewTabs extends React.Component {
 	}
 
 	componentDidMount() {
-		this.loadStateFromStorage()
+		this.loadStateFromStorage();
 	}
 
   addTab(e) {
@@ -206,7 +205,8 @@ class AchievementViewTabs extends React.Component {
 			var tabs = state.tabs
 			var curr = tabs[tab]
 
-			curr.sort(sortfunc(achievement_data, this.props.achieves))
+			// TODO: Don't directly rely on cached data...
+			curr.sort(sortfunc(GW2API._cache.achievements, this.props.achieves))
 			if (reverse) curr.reverse()
 
 			tabs[tab] = curr
@@ -285,12 +285,23 @@ class AchievementViewTabs extends React.Component {
   loadStateFromStorage() {
     const newtabs = localStorage.getItem("tabs")
 
-    if (!newtabs)
-      return
+    if (!newtabs) {
+			// Even if there's nothing in localstorage, we still want to force the cache update here
+			GW2API.getAchievements(Object.values(this.state.tabs).reduce((a,b) => a.concat(b), []))
+				.then(() => {
+					this.forceUpdate();
+				});
+			return
+		}
 
-    console.log("reloading tabs from localstorage:")
-    console.log(JSON.parse(newtabs))
-    this.setState({tabs: JSON.parse(newtabs)}, () => console.log(this.state))
+
+    console.log("reloading tabs from localstorage")
+    this.setState({tabs: JSON.parse(newtabs)}, () => {
+			GW2API.getAchievements(Object.values(this.state.tabs).reduce((a,b) => a.concat(b), []))
+				.then(() => {
+					this.forceUpdate();
+				});
+		});
   }
 
 	render() {
@@ -332,7 +343,9 @@ class AchievementViewTabs extends React.Component {
 								show={!this.state.showTabNav}
 								/>
 							<AchievementView
-								achievements={tab[1].map(a => achievement_data[a]).filter(a => a)}
+								// TODO: PROBABLY NOT THIS. Directly accessing the cache is hella janky.
+								//  The async here needs to be handled better, perhaps by setting state?
+								achievements={tab[1].map(a => GW2API._cache.achievements[a]).filter(a => a)}
 								current={this.props.achieves}
 								deselectAchievement={this.deselectAchievement.bind(this)}
 								/>
