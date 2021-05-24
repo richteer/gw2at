@@ -9,7 +9,7 @@ var item_data = {}
 var skin_data = {}
 var mini_data = {}
 
-class AchivementBit extends React.Component {
+class AchievementBit extends React.Component {
 
   constructor(){
     super()
@@ -34,7 +34,7 @@ class AchivementBit extends React.Component {
       this.setState({item: mini_data[id]})
     }
 
-    if(!cached){
+    if((!cached) && (type !== "Text")){
       var itemInfo = await GW2API.getItem(id, type)
       
       if(itemInfo !== undefined){
@@ -90,4 +90,4 @@ class AchivementBit extends React.Component {
   }
 }
       
-export default AchivementBit
+export default AchievementBit
